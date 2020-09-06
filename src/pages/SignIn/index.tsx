@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { toast } from 'react-toastify';
-import { Container, Card, FormStyle } from './style';
+import { Container, Card, FormStyle, AnimationContainer } from './style';
 import logo from '../../assets/logo.svg';
 
 import { useAuth } from '../../hooks/AuthContext';
@@ -38,24 +38,27 @@ const SignIn: React.FC = () => {
 
   return (
     <Container>
-      <Card>
-        <img src={logo} alt="Flroescer" />
+      <AnimationContainer>
+        <Card>
+          <img src={logo} alt="Flroescer" />
 
-        <h2>Login</h2>
+          <h2>Login</h2>
 
-        <Form onSubmit={handleAuthenticate}>
-          <FormStyle>
-            <Input name="email" placeholder="E-mail" />
-            <Input name="password" type="password" placeholder="Senha" />
-            <Button type="submit">Login</Button>
-          </FormStyle>
-        </Form>
+          <Form onSubmit={handleAuthenticate}>
+            <FormStyle>
+              <Input name="email" placeholder="E-mail" />
+              <Input name="password" type="password" placeholder="Senha" />
+              <Link to="forgot-password">Esqueceu sua senha ?</Link>
+              <Button type="submit">Login</Button>
+            </FormStyle>
+          </Form>
 
-        <Link to="signup">
-          <FiLogIn />
-          Criar Conta
-        </Link>
-      </Card>
+          <Link to="signup">
+            <FiLogIn />
+            Criar Conta
+          </Link>
+        </Card>
+      </AnimationContainer>
     </Container>
   );
 };
