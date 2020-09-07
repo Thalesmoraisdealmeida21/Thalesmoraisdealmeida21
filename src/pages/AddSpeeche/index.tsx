@@ -56,7 +56,7 @@ const AddSpeeche: React.FC = () => {
 
   return (
     <>
-      <Header />
+      <Header position={2} />
 
       <ContainerFormAddSpeeche>
         <Form ref={formRef} onSubmit={handlAddSpeeche}>

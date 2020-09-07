@@ -48,7 +48,7 @@ const AddSpeeche: React.FC = () => {
   );
   return (
     <>
-      <Header />
+      <Header position={1} />
 
       <ContainerDashboard>
         <h1>Comprar Palestras</h1>

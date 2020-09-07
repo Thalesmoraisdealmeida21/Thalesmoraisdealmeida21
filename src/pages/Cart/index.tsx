@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { Link } from 'react-router-dom';
 import { FiTrash } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import Header from '../../components/header';
@@ -21,17 +20,14 @@ const Cart: React.FC = () => {
       removeTheCart(id);
 
       const newCourses = courses.filter(course => course.id !== id);
-      console.log(newCourses);
 
       setCartItems(newCourses);
     },
-    [removeTheCart],
+    [courses, removeTheCart],
   );
 
   const addCoursesToUser = useCallback(async () => {
     try {
-      console.log(cartItems);
-
       const newItem = cartItems.map(coursToinsert => {
         return { course_id: coursToinsert.id };
       });
@@ -50,10 +46,10 @@ const Cart: React.FC = () => {
         type: 'error',
       });
     }
-  }, [cartItems]);
+  }, [clearCart, cartItems]);
   return (
     <>
-      <Header />
+      <Header position={3} />
 
       <ContainerDashboard>
         <h1>Carrinho</h1>

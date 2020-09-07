@@ -22,7 +22,7 @@ export const Content = styled.div`
 `;
 
 export const LoginContent = styled.div`
-  margin-left: auto;
+  margin-left: 200px;
   margin-top: 8px;
   display: flex;
   flex-direction: row;
@@ -91,14 +91,31 @@ export const DropdownContent = styled.div<DropdownProps>`
       : css`
           visibility: hidden;
         `}
+  z-index: 1;
   position: absolute;
   background: white;
-  top: 70px;
+  top: 60px;
   text-align: left;
   box-shadow: 3px 2px 9px 0px black;
   border-radius: 8px;
-  right: 10px;
-  width: 100%;
+  right: 0px;
+  width: 300px;
+
+  /* a {
+    background: transparent;
+    border: transparent;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    width: 100%;
+
+    padding: 10px;
+    &:hover {
+      background: silver;
+    }
+  }
 
   button {
     background: transparent;
@@ -110,10 +127,7 @@ export const DropdownContent = styled.div<DropdownProps>`
     &:hover {
       background: silver;
     }
-  }
-  ul {
-    list-style: none;
-  }
+  } */
 `;
 
 export const MenuContent = styled.div`
@@ -151,3 +165,5 @@ export const MenuContent = styled.div`
     }
   }
 `;
+
+export const Menu = styled.div``;

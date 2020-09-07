@@ -50,7 +50,6 @@ const CartProvider: React.FC = ({ children }) => {
         toast('Palestra adicionado as minhas palestras com sucesso', {
           type: 'success',
         });
-        console.log(courses);
       }
     },
     [courses],
