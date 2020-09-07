@@ -10,9 +10,7 @@ export const ContainerFormAddSpeeche = styled.div`
   span {
     text-align: left;
   }
-  h3 {
-    color: green;
-  }
+
 
   h1 {
     padding: 30px;

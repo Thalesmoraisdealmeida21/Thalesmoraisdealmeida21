@@ -16,14 +16,6 @@ export const ContainerDashboard = styled.div`
 export const Speeches = styled.div`
   display: flex;
   flex-direction: column;
-
-  a {
-    color: white;
-  }
-
-  a:hover {
-    color: black;
-  }
 `;
 
 export const ItemList = styled.div`

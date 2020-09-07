@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import GlobalStyle from './styles/global';
 
 import { AuthProvider } from './hooks/AuthContext';
+import { CartProvider } from './hooks/Cart';
 
 import Routes from './routes';
 
@@ -12,10 +13,12 @@ const App: React.FC = () => {
     <>
       <BrowserRouter>
         <AuthProvider>
-          <Routes />
+          <CartProvider>
+            <Routes />
+          </CartProvider>
         </AuthProvider>
         <ToastContainer
-          position="top-right"
+          position="top-left"
           autoClose={5000}
           hideProgressBar
           newestOnTop={false}

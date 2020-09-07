@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   FiChevronDown,
   FiShoppingCart,
@@ -15,6 +15,8 @@ import {
   DropdownContent,
 } from './style';
 import { useAuth } from '../../hooks/AuthContext';
+
+import { useCart } from '../../hooks/Cart';
 
 import logo from '../../assets/logoRounded.svg';
 import profile from '../../assets/profile.jpeg';
@@ -41,6 +43,7 @@ const Header: React.FC = () => {
     history.goBack();
   }, [history]);
 
+  const { courses } = useCart();
   return (
     <Container>
       <Content>
@@ -51,15 +54,21 @@ const Header: React.FC = () => {
         <MenuContent>
           <ul>
             <li>
-              <Link to="/add-speeche">Novao Palestra</Link>
+              <Link id="NovaPalestra" to="/add-speeche">
+                Novao Palestra
+              </Link>
             </li>
 
             <li>
-              <Link to="/add-speeche">MInhas Palestras</Link>
+              <Link id="MinhasPalestras" to="/dashboard">
+                MInhas Palestras
+              </Link>
             </li>
 
             <li>
-              <Link to="/add-speeche">Comprar Palestras</Link>
+              <Link id="Comprar Palestras" to="/buy-speeches">
+                Comprar Palestras
+              </Link>
             </li>
           </ul>
         </MenuContent>
@@ -74,8 +83,11 @@ const Header: React.FC = () => {
             <FiChevronDown size={24} color="#fff" />
           </button>
 
-          <FiShoppingCart size={32} color="#fff" />
-          <span>3</span>
+          <Link to="/cart">
+            <FiShoppingCart size={32} color="#fff" />
+            <span>{courses.length}</span>
+          </Link>
+
           <DropdownContent showDrop={dropdownState}>
             <ul>
               <li>

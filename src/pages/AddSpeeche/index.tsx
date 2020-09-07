@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 
 import Header from '../../components/header';
@@ -21,29 +22,37 @@ interface AddSpeecheDTO {
 
 const AddSpeeche: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const handlAddSpeeche = useCallback(async (data: AddSpeecheDTO) => {
-    console.log(data);
-    try {
-      formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required(),
-        videoLink: Yup.string().required(),
-        price: Yup.number().required(),
-      });
+  const history = useHistory();
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+  const handlAddSpeeche = useCallback(
+    async (data: AddSpeecheDTO) => {
+      console.log(data);
+      try {
+        formRef.current?.setErrors({});
 
-      await api.post('/courses', data);
-      toast('Curso Cadastrado com sucesso', { type: 'success' });
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        toast('Preencha todos os campos para continuar', { type: 'error' });
+        const schema = Yup.object().shape({
+          name: Yup.string().required(),
+          videoLink: Yup.string().required(),
+          price: Yup.number().required(),
+        });
+
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+
+        await api.post('/courses', data);
+        toast('Curso Cadastrado com sucesso', { type: 'success' });
+
+        history.push('/buy-speeches');
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          toast('Preencha todos os campos para continuar', { type: 'error' });
+        }
       }
-    }
-  }, []);
+    },
+    [history],
+  );
 
   return (
     <>

@@ -28,19 +28,21 @@ export const LoginContent = styled.div`
   flex-direction: row;
   position: relative;
 
-  > span {
-    background: black;
-    width: 15px;
-    color: white;
-    height: 15px;
-    text-align: center;
-    border-radius: 50%;
-    font-size: 12px;
-    margin-top: 35px;
-    position: absolute;
-    left: 99%;
-    right: 10%;
-    margin-right: 30px;
+  a {
+    > span {
+      background: black;
+      width: 15px;
+      color: white;
+      height: 15px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 12px;
+      margin-top: 35px;
+      position: absolute;
+      left: 99%;
+      right: 10%;
+      margin-right: 30px;
+    }
   }
 
   button {
