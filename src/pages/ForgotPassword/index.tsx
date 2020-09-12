@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
-import { FiLogIn, FiArrowDownLeft } from 'react-icons/fi';
+import { FiArrowDownLeft } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { Container, Card, FormStyle } from './style';
 import Button from '../../components/button';

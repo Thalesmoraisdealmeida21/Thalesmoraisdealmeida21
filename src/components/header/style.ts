@@ -15,19 +15,60 @@ export const Content = styled.div`
   display: flex;
 
   svg {
-    margin-top: 8px;
-    margin-left: 16px;
+    margin-top: 20px;
     cursor: pointer;
+  }
+
+  > svg {
+    height: 40px;
+    width: 40px;
+
+    cursor: pointer;
+
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    margin: auto 10vw;
+  }
+
+  img {
+    @media (max-width: 900px) {
+      display: none;
+    }
   }
 `;
 
 export const LoginContent = styled.div`
-  margin-left: 200px;
+  margin-left: auto;
   margin-top: 8px;
   display: flex;
   flex-direction: row;
   position: relative;
 
+  @media (max-width: 900px) {
+    button {
+      margin-left: auto;
+    }
+
+    div {
+      margin-right: auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    margin-left: 0;
+    width: 100vw;
+
+    div {
+      width: 200px;
+    }
+    button {
+      margin-left: auto;
+    }
+  }
   a {
     > span {
       background: black;
@@ -100,34 +141,6 @@ export const DropdownContent = styled.div<DropdownProps>`
   border-radius: 8px;
   right: 0px;
   width: 300px;
-
-  /* a {
-    background: transparent;
-    border: transparent;
-    height: 100%;
-    width: 100%;
-    text-decoration: none;
-    color: black;
-    text-align: center;
-    width: 100%;
-
-    padding: 10px;
-    &:hover {
-      background: silver;
-    }
-  }
-
-  button {
-    background: transparent;
-    border: transparent;
-    height: 100%;
-    width: 100%;
-
-    padding: 10px;
-    &:hover {
-      background: silver;
-    }
-  } */
 `;
 
 export const MenuContent = styled.div`
@@ -165,5 +178,3 @@ export const MenuContent = styled.div`
     }
   }
 `;
-
-export const Menu = styled.div``;

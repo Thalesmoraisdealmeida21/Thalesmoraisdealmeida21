@@ -91,6 +91,11 @@ export const AddToCartButton = styled.div`
   margin-left: auto;
   margin-right: 32px;
   transition: 0.7s;
+
+  div {
+    display: flex;
+    flex-direction: row;
+  }
   span {
     font-size: 16px;
   }

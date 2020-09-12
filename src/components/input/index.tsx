@@ -9,7 +9,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputLogin: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
-  console.log(name);
   const { fieldName, error, registerField } = useField(name);
   const inputRef = useRef(null);
 
@@ -23,7 +22,7 @@ const InputLogin: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
 
   return (
     <>
-      <Container haveError={!!error}>
+      <Container {...rest} haveError={!!error}>
         {Icon && <Icon size={20} />}
         <input ref={inputRef} {...rest} />
       </Container>

@@ -76,7 +76,7 @@ const CartProvider: React.FC = ({ children }) => {
 
   const value = React.useMemo(
     () => ({ clearCart, addToCart, removeTheCart, courses }),
-    [addToCart, removeTheCart, courses],
+    [addToCart, removeTheCart, courses, clearCart],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

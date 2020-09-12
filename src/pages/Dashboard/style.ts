@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ContainerDashboard = styled.div`
-  margin: auto 15vw;
+  margin: auto 16vw;
   position: static;
 
   padding: 40px 0;
@@ -10,6 +10,18 @@ export const ContainerDashboard = styled.div`
   h1 {
     padding: 50px;
     font-size: 48px;
+    font-weight: 1000;
+  }
+  h2 {
+    font-weight: 700;
+    margin: 10px;
+    margin-bottom: 8px;
+  }
+  p {
+    margin-left: 16px;
+    max-width: 600px;
+    text-align: left;
+    overflow: hidden;
   }
 `;
 
@@ -45,7 +57,7 @@ export const ItemList = styled.div`
     flex-direction: column;
   }
   h2 {
-    margin-top: 32px;
+    margin-top: 16px;
     margin-left: 16px;
   }
 
@@ -115,4 +127,13 @@ export const AddToCartButton = styled.div`
       color: #939292;
     }
   }
+`;
+
+export const ExpiredContent = styled.div`
+  margin-left: auto;
+  color: red;
+  font-weight: bold;
+  margin-right: 32px;
+  margin-top: auto;
+  margin-bottom: auto;
 `;

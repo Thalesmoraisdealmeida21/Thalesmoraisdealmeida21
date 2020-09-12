@@ -8,20 +8,34 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import ReactPlayer from 'react-player';
 import Header from '../../components/header';
 import api from '../../services/api';
 
-import { ItemList, Speeches, ContainerDashboard } from './style';
+import {
+  ItemList,
+  Speeches,
+  ContainerDashboard,
+  ExpiredContent,
+} from './style';
 
 interface Speeche {
   id: string;
   name: string;
   price: number;
+  description: string;
+  expired: boolean;
 }
 
 interface UserData {
   name: string;
   courses: Speeche[];
+}
+
+interface Course {
+  limitAccess: DataCue;
+  id: string;
+  name: string;
 }
 const Dashboard: React.FC = () => {
   const history = useHistory();
@@ -30,15 +44,24 @@ const Dashboard: React.FC = () => {
   const [modalItem, setModalItem] = useState<string>('');
 
   useEffect(() => {
-    api.get<UserData>('/users/courses').then(response => {
-      setSpeeches(response.data.courses);
+    api.get<Speeche[]>('/users/courses').then(response => {
+      setSpeeches(response.data);
     });
   }, []);
 
-  const handleClickOpen = useCallback(async (id: string) => {
-    setModalItem(id);
-    setOpenModal(true);
-  }, []);
+  const handleClickOpen = useCallback(
+    async (id: string) => {
+      setModalItem(id);
+
+      const response = await api.get<Course>(`/courses/${id}`);
+      if (response.data.limitAccess) {
+        history.push(`video/${id}`);
+      } else {
+        setOpenModal(true);
+      }
+    },
+    [history],
+  );
 
   const handleClose = useCallback(() => {
     setOpenModal(false);
@@ -66,9 +89,16 @@ const Dashboard: React.FC = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">ATENÇÃO !!!</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          ATENÇÃO !!!
+          <strong color="red"> Assista o video antes de continuar</strong>
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
+            <ReactPlayer
+              width="100%"
+              url="https://www.youtube.com/watch?v=Rsj_z43oNRk"
+            />
             No momento que você confirmar, clicando no botão abaixo. Você tera
             um prazo de 24 hroas para assistir a paletra. Passado este periodo
             não poderá mais acessar o conteúdo
@@ -90,24 +120,22 @@ const Dashboard: React.FC = () => {
           {speeches?.map(spc => {
             return (
               <ItemList key={spc.id}>
-                <button type="button">
+                <Button disabled={spc.expired} type="button">
                   <FiPlay
                     onClick={() => {
                       handleClickOpen(spc.id);
                     }}
                     size={40}
                   />
-                </button>
+                </Button>
                 <div>
                   <h2>{spc.name}</h2>
-
-                  <h3>
-                    {Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    }).format(spc.price)}
-                  </h3>
+                  {/*
+                  <p>{spc?.description}</p> */}
                 </div>
+                <ExpiredContent>
+                  {spc.expired ? 'Acesso Expirado' : ''}
+                </ExpiredContent>
               </ItemList>
             );
           })}

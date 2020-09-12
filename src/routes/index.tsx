@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Switch } from 'react-router-dom';
 import Route from './Route';
 
@@ -8,7 +8,9 @@ import Dashboard from '../pages/Dashboard';
 import AddSpeeche from '../pages/AddSpeeche';
 
 import BuySpeeches from '../pages/BuySpeeches';
+import User from '../pages/User';
 import ViewSpeeche from '../pages/ViewSpeeche';
+import UpdateSpeeche from '../pages/UpdateSpeeche';
 
 import ForgotPassword from '../pages/ForgotPassword';
 
@@ -24,7 +26,13 @@ const Routes: React.FC = () => (
     <Route path="/cart" isPrivate component={Cart} />
     <Route path="/dashboard" isPrivate component={Dashboard} />
     <Route path="/add-speeche" isPrivate component={AddSpeeche} />
+    <Route
+      path="/speeche/update/:courseId"
+      isPrivate
+      component={UpdateSpeeche}
+    />
     <Route path="/buy-speeches" isPrivate component={BuySpeeches} />
+    <Route path="/users" isPrivate component={User} />
   </Switch>
 );
 

@@ -3,26 +3,26 @@ import {
   FiChevronDown,
   FiShoppingCart,
   FiArrowLeft,
-  FiTrash,
   FiPlusSquare,
+  FiUser,
 } from 'react-icons/fi';
 
 import { MdAddShoppingCart, MdOndemandVideo } from 'react-icons/md';
 import { Link, useHistory } from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Menu from '@material-ui/core/Menu';
 
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import Button from '@material-ui/core/Button';
 
-import {
-  Container,
-  Content,
-  LoginContent,
-  MenuContent,
-  DropdownContent,
-  Menu,
-} from './style';
+import { makeStyles } from '@material-ui/core/styles';
+
+// import LinearProgress from '@material-ui/core/LinearProgress';
+
+import MenuItem from '@material-ui/core/MenuItem';
+import { toast } from 'react-toastify';
+import { Container, Content, LoginContent } from './style';
+
 import { useAuth } from '../../hooks/AuthContext';
 
 import { useCart } from '../../hooks/Cart';
@@ -35,13 +35,7 @@ interface PositionMenu {
 }
 
 const Header: React.FC<PositionMenu> = ({ position }) => {
-  const [dropdownState, setDropdownstate] = useState(false);
-
   const { user } = useAuth();
-
-  const showDropdown = useCallback(() => {
-    setDropdownstate(!dropdownState);
-  }, [dropdownState]);
 
   const { signOut } = useAuth();
 
@@ -65,42 +59,56 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
 
   const classes = useStyles();
   const [value, setValue] = useState(position || 0);
+  const [statusMenu, setStatusMenu] = useState<null | HTMLElement>(null);
+
+  const handleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
+    setStatusMenu(event.currentTarget);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setStatusMenu(null);
+  }, []);
 
   return (
-    <Container>
-      <Content>
-        <img src={logo} alt="Logo" />
+    <>
+      <Container>
+        <Content>
+          <img src={logo} alt="Logo" />
 
-        <FiArrowLeft onClick={goBack} size={70} color="white" />
+          <FiArrowLeft onClick={goBack} size={40} color="white" />
 
-        <MenuContent>
-          <ul />
-        </MenuContent>
+          <LoginContent>
+            <img src={profile} alt="profile" />
+            <div>
+              <strong>Bem Vindo</strong>
+              <span>{user.name}</span>
+            </div>
+            <Button
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <FiChevronDown size={24} color="#fff" />
+            </Button>
 
-        <LoginContent>
-          <img src={profile} alt="profile" />
-          <div>
-            <strong>Bem Vindo</strong>
-            <span>{user.name}</span>
-          </div>
-          <button type="button" onClick={showDropdown}>
-            <FiChevronDown size={24} color="#fff" />
-          </button>
+            <Link to="/cart">
+              <FiShoppingCart size={32} color="#fff" />
+              <span>{courses.length}</span>
+            </Link>
 
-          <Link to="/cart">
-            <FiShoppingCart size={32} color="#fff" />
-            <span>{courses.length}</span>
-          </Link>
+            <Menu
+              anchorEl={statusMenu}
+              keepMounted
+              open={Boolean(statusMenu)}
+              onClose={handleClose}
+              style={{ scrollMarginBottom: 'hidden', position: 'absolute' }}
+            >
+              <MenuItem onClick={handleClose}>Perfil</MenuItem>
+              <MenuItem onClick={logout}>Logout</MenuItem>
+            </Menu>
+          </LoginContent>
+        </Content>
 
-          <DropdownContent showDrop={dropdownState}>
-            <button onClick={logout} type="button">
-              Sair
-            </button>
-          </DropdownContent>
-        </LoginContent>
-      </Content>
-
-      <Menu>
         <BottomNavigation
           value={value}
           onChange={(event, newValue) => {
@@ -126,15 +134,31 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
           />
 
           <BottomNavigationAction
+            style={{
+              display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
+            }}
             onClick={() => {
               history.push('/add-speeche');
             }}
             label="Nova Palestra"
             icon={<FiPlusSquare />}
           />
+
+          <BottomNavigationAction
+            style={{
+              display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
+            }}
+            onClick={() => {
+              toast('esta funcionalidade esta em desenvolvimento', {
+                type: 'warning',
+              });
+            }}
+            label="Usuários"
+            icon={<FiUser />}
+          />
         </BottomNavigation>
-      </Menu>
-    </Container>
+      </Container>
+    </>
   );
 };
 

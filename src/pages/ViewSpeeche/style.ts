@@ -37,8 +37,9 @@ export const ItemList = styled.div`
     flex-direction: column;
   }
   h2 {
+    width: 100%;
     margin-top: 32px;
-    margin-left: 16px;
+    margin-left: 8px;
   }
 
   h3 {
@@ -85,26 +86,38 @@ export const ItemList = styled.div`
   }
 `;
 
-export const AddToCartButton = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: 32px;
-  transition: 0.7s;
-  span {
-    font-size: 16px;
+export const ContainerVideo = styled.div`
+  margin-top: 80px;
+  align-content: center;
+  text-align: center;
+  width: 100vw;
+  max-width: 100%;
+
+  h2 {
+    margin-top: 0;
   }
 
-  button {
-    background: transparent;
-    color: black;
+  @media (max-width: 800px) {
+    h1 {
+      font-size: 24px;
+    }
 
-    &:hover {
-      background: transparent;
-      border: transparent;
-      box-shadow: none;
-
-      color: #939292;
+    h2 {
+      font-size: 18px;
     }
   }
 `;
+
+export const VideoContent = styled.div`
+  div {
+    min-width: 350px;
+    margin: 0 auto;
+
+    @media (max-width: 800px) {
+      width: 150px;
+      margin-left: 0;
+    }
+  }
+`;
+
+export const Descritpion = styled.div``;
