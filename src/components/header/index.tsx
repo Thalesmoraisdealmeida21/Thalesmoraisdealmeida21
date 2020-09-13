@@ -28,7 +28,7 @@ import { useAuth } from '../../hooks/AuthContext';
 import { useCart } from '../../hooks/Cart';
 
 import logo from '../../assets/logoRounded.svg';
-import profile from '../../assets/profile.jpeg';
+import profile from '../../assets/profile.jpg';
 
 interface PositionMenu {
   position?: number;
