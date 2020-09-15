@@ -178,7 +178,13 @@ const User: React.FC = () => {
               }}
               placeholder="Buscar um usuário"
             />
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                history.push('/users/sendmail');
+              }}
+            >
               Enviar E-mail Para todos
             </Button>
           </TableHeaderContent>

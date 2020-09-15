@@ -13,6 +13,7 @@ import ViewSpeeche from '../pages/ViewSpeeche';
 import UpdateSpeeche from '../pages/UpdateSpeeche';
 
 import SendMail from '../pages/SendMail';
+import SendMailAllUsers from '../pages/SendMailAllUsers';
 
 import ForgotPassword from '../pages/ForgotPassword';
 
@@ -34,7 +35,7 @@ const Routes: React.FC = () => (
       component={UpdateSpeeche}
     />
     <Route path="/buy-speeches" isPrivate component={BuySpeeches} />
-
+    <Route path="/users/sendmail" isPrivate component={SendMailAllUsers} />
     <Route path="/users/sendmail/:uuidUser" isPrivate component={SendMail} />
     <Route path="/users" isPrivate component={User} />
   </Switch>
