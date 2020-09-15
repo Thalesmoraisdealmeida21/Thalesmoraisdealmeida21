@@ -149,9 +149,7 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
               display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
             }}
             onClick={() => {
-              toast('esta funcionalidade esta em desenvolvimento', {
-                type: 'warning',
-              });
+              history.push('/users');
             }}
             label="Usuários"
             icon={<FiUser />}

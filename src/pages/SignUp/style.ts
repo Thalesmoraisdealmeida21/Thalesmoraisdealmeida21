@@ -18,9 +18,10 @@ export const Card = styled.div`
   border: transparent;
   margin-top: 10vh;
   padding-bottom: 50px;
+  width: 500px;
 
   img {
-    max-width: 60%;
+    max-width: 150px;
   }
 
   h2 {

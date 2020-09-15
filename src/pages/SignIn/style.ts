@@ -16,10 +16,11 @@ export const Card = styled.div`
   box-shadow: 1px 1px 15px black;
   border-radius: 15px;
   border: transparent;
-  margin-top: 20vh;
+  margin-top: 10vh;
+  width: 500px;
   min-height: 400px;
   img {
-    max-width: 60%;
+    max-width: 150px;
   }
 
   h2 {

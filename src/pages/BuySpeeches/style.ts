@@ -46,36 +46,6 @@ export const ItemList = styled.div`
     margin-left: 16px;
     margin-top: 8px;
   }
-  button {
-    margin-top: auto;
-    background: #4d96ca;
-    height: 80px;
-    border-radius: 50%;
-    border: transparent;
-    width: 80px;
-    margin-top: 20px;
-
-    margin-left: 16px;
-    transition: 0.7s;
-    color: white;
-
-    &:hover {
-      background: white;
-      border: silver;
-      box-shadow: 1px 1px 10px;
-      color: #000;
-
-      button + svg {
-        color: #000;
-      }
-    }
-
-    &:active {
-      transition: ease 0.7s;
-
-      background: silver;
-    }
-  }
 
   > svg {
     margin-left: auto;
@@ -96,20 +66,27 @@ export const AddToCartButton = styled.div`
     display: flex;
     flex-direction: row;
   }
-  span {
-    font-size: 16px;
-  }
 
   button {
-    background: transparent;
-    color: black;
+    margin: 15px;
+    height: 30px;
+    font-size: 12px;
+    margin-top: 40px;
+    text-align: center;
+  }
 
-    &:hover {
-      background: transparent;
-      border: transparent;
-      box-shadow: none;
+  a {
+    margin: 15px;
+    height: 30px;
+    font-size: 12px;
+    text-decoration: none;
+    color: #3f51b5;
+  }
 
-      color: #939292;
-    }
+  svg {
+    margin-right: 16px;
+    width: 16px;
+    height: 16px;
+    color: #3f51b5;
   }
 `;

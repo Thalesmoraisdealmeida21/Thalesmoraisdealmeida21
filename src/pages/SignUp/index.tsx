@@ -7,7 +7,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { FiCornerDownLeft, FiUser, FiKey, FiMail } from 'react-icons/fi';
 import * as Yup from 'yup';
 import { Container, Card, FormStyle } from './style';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/LogoRounded.png';
 
 import Input from '../../components/inputLogin';
 import Button from '../../components/button';
@@ -106,7 +106,7 @@ const SignUp: React.FC = () => {
 
         <Link to="/">
           <FiCornerDownLeft />
-          Foltar para o Login
+          Voltar para o Login
         </Link>
       </Card>
     </Container>

@@ -145,8 +145,11 @@ const AddSpeeche: React.FC = () => {
               init={{
                 selector: 'textarea',
                 branding: false,
-                plugins: ['fullscreen', 'preview'],
-
+                plugins: ['fullscreen', 'preview', 'link'],
+                default_link_target: '_blank',
+                toolbar:
+                  'undo | remake link fullscreen bold italic fontsizeselect forecolor backcolor ',
+                fontsize_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
                 language: 'pt_BR',
               }}
               apiKey="vrzyvdpq0s7ufjhjrhrcysrwkvwwk2tbzrpq02d7k5m1knqg"

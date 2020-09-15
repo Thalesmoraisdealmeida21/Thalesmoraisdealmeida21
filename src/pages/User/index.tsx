@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable camelcase */
+import React, { useState, useEffect, useCallback } from 'react';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,9 +12,20 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { Button, Input } from '@material-ui/core';
 import { TableContainer } from '@material-ui/core';
+import { format } from 'date-fns';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import Header from '../../components/header';
+import api from '../../services/api';
 
-import { ContainerUsers, TableHeaderContent } from './styles';
+import {
+  ContainerUsers,
+  TableHeaderContent,
+  ContainerUser,
+  FormGroup,
+} from './styles';
 
 const useStyles = makeStyles({
   table: {
@@ -21,38 +33,151 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-): {
+interface User {
+  id: string;
   name: string;
-  calories: number;
-  fat: number;
-  carbs: number;
-  protein: number;
-} {
-  return { name, calories, fat, carbs, protein };
+  email: string;
+  telephone: string;
+  cpfCnpj: string;
+  address: string;
+  neighborhood: string;
+  city: string;
+  uf: string;
+  cep: number;
+  addressNumber: number;
+  complement: string;
+  created_at: Date;
 }
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+
 const User: React.FC = () => {
   const classes = useStyles();
+  const [users, setUsers] = useState<User[]>([]);
+  const [userSelect, setUserSelect] = useState<User>({} as User);
+  const [statusModal, setStatusModal] = useState<boolean>(false);
+
+  const history = useHistory();
+  useEffect(() => {
+    async function getUsers(): Promise<void> {
+      const response = await api.get<User[]>('/users');
+      setUsers(response.data);
+    }
+
+    getUsers();
+  }, []);
+
+  const toggleModal = useCallback(
+    async user_id => {
+      try {
+        const response = await api.get<User>(`/users/${user_id}`);
+        setUserSelect(response.data);
+        setStatusModal(!statusModal);
+      } catch {
+        toast('Ocorreu um erro ao obter os dados do usuario', {
+          type: 'error',
+        });
+      }
+    },
+    [statusModal],
+  );
+
+  const searchUser = useCallback(async search => {
+    try {
+      if (!search) {
+        const response = await api.get<User[]>(`/users`);
+        setUsers(response.data);
+      } else {
+        const response = await api.get<User[]>(
+          `/users/search?search=${search}`,
+        );
+        setUsers(response.data);
+      }
+    } catch {
+      toast('Ocorreu um erro na pesquisa de usuário', {
+        type: 'error',
+      });
+    }
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setStatusModal(!statusModal);
+  }, [statusModal]);
+
   return (
     <>
       <Header position={3} />
+
+      <Dialog
+        maxWidth="lg"
+        onClose={toggleModal}
+        aria-labelledby="simple-dialog-title"
+        open={statusModal}
+      >
+        <DialogTitle id="simple-dialog-title">
+          <h1>{userSelect.name}</h1>
+        </DialogTitle>
+
+        <ContainerUser>
+          <form>
+            <FormGroup>
+              <input
+                type="text"
+                disabled
+                value={userSelect.email || 'Não informado'}
+              />
+              <input
+                type="text"
+                disabled
+                value={userSelect.telephone || 'Não informado'}
+              />
+            </FormGroup>
+
+            <input
+              type="text"
+              disabled
+              value={userSelect.address || 'Não informado'}
+            />
+
+            <input
+              type="text"
+              disabled
+              value={userSelect.neighborhood || 'Não informado'}
+            />
+            <FormGroup>
+              <input
+                type="text"
+                disabled
+                value={userSelect.city || 'Não informado'}
+              />
+              <input
+                type="text"
+                disabled
+                value={userSelect.cep || 'Não informado'}
+              />
+              <input
+                type="text"
+                disabled
+                value={userSelect.uf || 'Não informado'}
+              />
+            </FormGroup>
+          </form>
+
+          <Button color="primary" variant="outlined" onClick={closeModal}>
+            Fechar
+          </Button>
+        </ContainerUser>
+      </Dialog>
+
       <ContainerUsers>
         <TableContainer component={Paper}>
           <TableHeaderContent>
             <h1>Usuários</h1>
-            <Input name="search" placeholder="Buscar um usuário" />
+            <Input
+              name="search"
+              onChange={evt => {
+                searchUser(evt.target.value);
+              }}
+              placeholder="Buscar um usuário"
+            />
             <Button variant="contained" color="primary">
               Enviar E-mail Para todos
             </Button>
@@ -61,23 +186,53 @@ const User: React.FC = () => {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Nome do Usuário</TableCell>
-                <TableCell align="right">E-mail</TableCell>
-                <TableCell align="right">Criação da Conta</TableCell>
-                <TableCell align="right">Opções</TableCell>
+                <TableCell>
+                  <b>Nome do Usuário</b>
+                </TableCell>
+                <TableCell align="left">
+                  <b>E-mail</b>
+                </TableCell>
+                <TableCell align="center">
+                  <b>Criação da Conta</b>
+                </TableCell>
+                <TableCell align="center">
+                  <b>Opções</b>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map(row => (
-                <TableRow key={row.name}>
+              {users.map(user => (
+                <TableRow key={user.id}>
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {user.name}
                   </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
+                  <TableCell align="left">{user.email}</TableCell>
+                  <TableCell align="center">
+                    {format(new Date(user.created_at), 'dd/MM/yyyy')}
+                  </TableCell>
                   <TableCell align="right">
-                    <Button>Enviar E-mail</Button>
-                    <Button>Mais Informações</Button>
+                    <Button
+                      variant="contained"
+                      style={{ margin: '10px' }}
+                      color="default"
+                      size="small"
+                      onClick={() => {
+                        history.push(`/users/sendmail/${user.id}`);
+                      }}
+                    >
+                      Enviar E-mail
+                    </Button>
+
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        toggleModal(user.id);
+                      }}
+                      color="secondary"
+                      size="small"
+                    >
+                      Mais Informações
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

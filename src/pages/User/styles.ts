@@ -23,3 +23,38 @@ export const TableHeaderContent = styled.div`
     position: initial;
   }
 `;
+
+export const ContainerUser = styled.div`
+  padding: 0 10vw;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  input {
+    padding: 15px;
+    border: transparent;
+    width: 100%;
+    border-radius: 4px;
+    background: #fdfdfd;
+    box-shadow: 1px 1px 3px 0px;
+    margin-top: 16px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    width: 200px;
+    margin-left: auto;
+    margin-top: 30px;
+  }
+`;
+
+export const FormGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  input:first-child {
+    margin-right: 16px;
+  }
+`;

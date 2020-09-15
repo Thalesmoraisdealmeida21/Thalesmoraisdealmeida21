@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { FiPlus } from 'react-icons/fi';
+import { FiPlus, FiEdit } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
@@ -75,15 +75,17 @@ const AddSpeeche: React.FC = () => {
 
                 <AddToCartButton>
                   <div>
-                    <button
+                    <Button
+                      variant="outlined"
+                      color="primary"
                       type="button"
                       onClick={() => {
                         handleAddToMySpeeches(course);
                       }}
                     >
-                      <FiPlus size={40} />
+                      <FiPlus size={20} />
                       <span>Adicionar ao Carrinho</span>
-                    </button>
+                    </Button>
 
                     <Button
                       variant="outlined"
@@ -92,7 +94,10 @@ const AddSpeeche: React.FC = () => {
                         display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
                       }}
                     >
-                      <Link to={`/speeche/update/${course.id}`}>Editar</Link>
+                      <Link to={`/speeche/update/${course.id}`}>
+                        <FiEdit size={20} />
+                        Editar
+                      </Link>
                     </Button>
                   </div>
                 </AddToCartButton>

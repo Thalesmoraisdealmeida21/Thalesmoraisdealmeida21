@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 
 import { Link } from 'react-router-dom';
-import { FiLogIn } from 'react-icons/fi';
+import { FiLogIn, FiMail, FiKey } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { toast } from 'react-toastify';
 import { Container, Card, FormStyle, AnimationContainer } from './style';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/LogoRounded.png';
 
 import { useAuth } from '../../hooks/AuthContext';
 
@@ -46,8 +46,13 @@ const SignIn: React.FC = () => {
 
           <Form onSubmit={handleAuthenticate}>
             <FormStyle>
-              <Input name="email" placeholder="E-mail" />
-              <Input name="password" type="password" placeholder="Senha" />
+              <Input icon={FiMail} name="email" placeholder="E-mail" />
+              <Input
+                icon={FiKey}
+                name="password"
+                type="password"
+                placeholder="Senha"
+              />
               <Link to="forgot-password">Esqueceu sua senha ?</Link>
               <Button type="submit">Login</Button>
             </FormStyle>
