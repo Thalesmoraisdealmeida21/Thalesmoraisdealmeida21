@@ -1,11 +1,10 @@
 /* eslint-disable camelcase */
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import { Editor } from '@tinymce/tinymce-react';
 import { Button } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Header from '../../components/header';
 import api from '../../services/api';
@@ -24,13 +23,11 @@ interface UserDTO {
 }
 
 const User: React.FC = () => {
-  const [user, setUser] = useState<UserDTO>();
   const formRef = useRef<FormHandles>(null);
   const [editor, setEditor] = useState();
 
   const sendMail = useCallback(
     async (data: SendMailDTOs) => {
-      console.log(data);
       try {
         await api.post('/users/sendmail/all', data);
 
