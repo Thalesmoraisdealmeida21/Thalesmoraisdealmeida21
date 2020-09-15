@@ -40,7 +40,7 @@ const User: React.FC = () => {
     async (data: SendMailDTOs) => {
       console.log(data);
       try {
-        const mailStatus = await api.post('/users/sendmail', {
+        await api.post('/users/sendmail', {
           ...data,
           to: uuidUser,
         });

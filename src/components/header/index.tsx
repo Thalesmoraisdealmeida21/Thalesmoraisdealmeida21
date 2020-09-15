@@ -20,7 +20,6 @@ import { makeStyles } from '@material-ui/core/styles';
 // import LinearProgress from '@material-ui/core/LinearProgress';
 
 import MenuItem from '@material-ui/core/MenuItem';
-import { toast } from 'react-toastify';
 import { Container, Content, LoginContent } from './style';
 
 import { useAuth } from '../../hooks/AuthContext';
