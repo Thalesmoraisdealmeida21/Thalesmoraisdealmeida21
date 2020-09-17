@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
+
 import Route from './Route';
 
 import SignUp from '../pages/SignUp';
@@ -19,26 +20,28 @@ import ForgotPassword from '../pages/ForgotPassword';
 
 import Cart from '../pages/Cart';
 
-const Routes: React.FC = () => (
-  <Switch>
-    <Route exact path="/" component={SignIn} />
-    <Route path="/signup" component={SignUp} />
-    <Route path="/forgot-password" component={ForgotPassword} />
+const Routes: React.FC = () => {
+  return (
+    <Switch>
+      <Route exact path="/" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/forgot-password" component={ForgotPassword} />
 
-    <Route path="/video/:id" isPrivate component={ViewSpeeche} />
-    <Route path="/cart" isPrivate component={Cart} />
-    <Route path="/dashboard" isPrivate component={Dashboard} />
-    <Route path="/add-speeche" isPrivate component={AddSpeeche} />
-    <Route
-      path="/speeche/update/:courseId"
-      isPrivate
-      component={UpdateSpeeche}
-    />
-    <Route path="/buy-speeches" isPrivate component={BuySpeeches} />
-    <Route path="/users/sendmail" isPrivate component={SendMailAllUsers} />
-    <Route path="/users/sendmail/:uuidUser" isPrivate component={SendMail} />
-    <Route path="/users" isPrivate component={User} />
-  </Switch>
-);
+      <Route path="/video/:id" isPrivate component={ViewSpeeche} />
+      <Route path="/cart" isPrivate component={Cart} />
+      <Route path="/dashboard" isPrivate component={Dashboard} />
+      <Route path="/add-speeche" isPrivate component={AddSpeeche} />
+      <Route
+        path="/speeche/update/:courseId"
+        isPrivate
+        component={UpdateSpeeche}
+      />
+      <Route path="/buy-speeches" isPrivate component={BuySpeeches} />
+      <Route path="/users/sendmail" isPrivate component={SendMailAllUsers} />
+      <Route path="/users/sendmail/:uuidUser" isPrivate component={SendMail} />
+      <Route path="/users" isPrivate component={User} />
+    </Switch>
+  );
+};
 
 export default Routes;

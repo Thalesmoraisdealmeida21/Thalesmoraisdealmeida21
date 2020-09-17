@@ -219,7 +219,7 @@ const User: React.FC = () => {
                   <TableCell align="right">
                     <Button
                       variant="contained"
-                      style={{ margin: '10px' }}
+                      style={{ margin: '10px', position: 'initial' }}
                       color="default"
                       size="small"
                       onClick={() => {
@@ -236,6 +236,7 @@ const User: React.FC = () => {
                       }}
                       color="secondary"
                       size="small"
+                      style={{ position: 'initial' }}
                     >
                       Mais Informações
                     </Button>

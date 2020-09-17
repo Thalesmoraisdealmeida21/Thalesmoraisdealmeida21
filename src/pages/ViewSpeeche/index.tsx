@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
@@ -28,6 +29,7 @@ const Dashboard: React.FC = () => {
     async function getDataVideo(): Promise<void> {
       try {
         const response = await api.get<Video>(`/courses/${id}`);
+        setTimeout(3000);
         setVideo(response.data);
       } catch (err) {
         toast('Acesso a palestra expirado', {
