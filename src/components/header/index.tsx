@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   FiChevronDown,
   FiShoppingCart,
@@ -20,14 +20,14 @@ import { makeStyles } from '@material-ui/core/styles';
 // import LinearProgress from '@material-ui/core/LinearProgress';
 
 import MenuItem from '@material-ui/core/MenuItem';
-import { Container, Content, LoginContent } from './style';
+import { Container, Content, LoginContent, UserLogo } from './style';
 
 import { useAuth } from '../../hooks/AuthContext';
 
 import { useCart } from '../../hooks/Cart';
 
 import logo from '../../assets/logoRounded.svg';
-import profile from '../../assets/profile.jpg';
+// import profile from '../../assets/profile.jpg';
 
 interface PositionMenu {
   position?: number;
@@ -59,6 +59,7 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
   const classes = useStyles();
   const [value, setValue] = useState(position || 0);
   const [statusMenu, setStatusMenu] = useState<null | HTMLElement>(null);
+  const [userLogo, setUserLogo] = useState('');
 
   const handleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setStatusMenu(event.currentTarget);
@@ -67,6 +68,19 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
   const handleClose = useCallback(() => {
     setStatusMenu(null);
   }, []);
+
+  useEffect(() => {
+    const { name } = user;
+
+    const nameArray = name.split(' ');
+
+    let logoToSet = '';
+    logoToSet +=
+      nameArray[0].substring(0, 1).toUpperCase() +
+      nameArray[1].substring(0, 1).toUpperCase();
+
+    setUserLogo(logoToSet);
+  }, [user]);
 
   return (
     <>
@@ -77,7 +91,9 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
           <FiArrowLeft onClick={goBack} size={40} color="white" />
 
           <LoginContent>
-            <img src={profile} alt="profile" />
+            <UserLogo>
+              <h1>{userLogo}</h1>
+            </UserLogo>
             <div>
               <strong>Bem Vindo</strong>
               <span>{user.name}</span>
@@ -102,7 +118,13 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
               onClose={handleClose}
               style={{ scrollMarginBottom: 'hidden', position: 'absolute' }}
             >
-              <MenuItem onClick={handleClose}>Perfil</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  history.push('/profile');
+                }}
+              >
+                Perfil
+              </MenuItem>
               <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
           </LoginContent>

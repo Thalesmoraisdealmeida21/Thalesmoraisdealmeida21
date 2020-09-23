@@ -15,6 +15,7 @@ import UpdateSpeeche from '../pages/UpdateSpeeche';
 
 import SendMail from '../pages/SendMail';
 import SendMailAllUsers from '../pages/SendMailAllUsers';
+import ProfilePage from '../pages/Profile';
 
 import ForgotPassword from '../pages/ForgotPassword';
 
@@ -31,6 +32,7 @@ const Routes: React.FC = () => {
       <Route path="/cart" isPrivate component={Cart} />
       <Route path="/dashboard" isPrivate component={Dashboard} />
       <Route path="/add-speeche" isPrivate component={AddSpeeche} />
+      <Route path="/profile" isPrivate component={ProfilePage} />
       <Route
         path="/speeche/update/:courseId"
         isPrivate

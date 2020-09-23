@@ -16,12 +16,13 @@ export const ContainerDashboard = styled.div`
     height: 60px;
     background: #4d96cb;
     padding: 10px;
+    margin-top: 24px;
     border: transparent;
     width: 220px;
     color: white;
     text-transform: uppercase;
     font-weight: bold;
-    margin-left: 60%;
+    margin-left: 84%;
     border-radius: 10px;
   }
 `;
@@ -42,5 +43,38 @@ export const ItemCart = styled.div`
   svg {
     margin-left: 30px;
     cursor: pointer;
+  }
+`;
+
+export const CardCart = styled.div`
+  background: white;
+  margin-top: 150px;
+  padding: 30px;
+
+  div {
+    margin-left: auto;
+    margin-bottom: 32px;
+    strong {
+      margin-left: 85%;
+      font-size: 32px;
+    }
+
+    span {
+      font-size: 32px;
+      color: green;
+      margin-bottom: 32px;
+    }
+  }
+`;
+
+export const HeaderItemsCart = styled.div`
+  color: #989898f8;
+  font-weight: 600;
+  margin: 16px;
+  span {
+    margin-left: 40px;
+  }
+  span + span {
+    margin-left: 58%;
   }
 `;

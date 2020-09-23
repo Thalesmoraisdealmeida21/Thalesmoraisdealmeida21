@@ -3,14 +3,28 @@ import styled, { css } from 'styled-components';
 interface ContainerProps {
   haveError: boolean;
 }
+
+export const ContainerInputs = styled.div`
+  width: 100%;
+  padding: 8px;
+
+  span {
+    font-size: 16px;
+  }
+`;
 export const Container = styled.div<ContainerProps>`
   padding: 15px;
   border-radius: 5px;
-  background: #e8e8e8;
+  background: #f3f3f3;
   width: 100%;
+  margin-top: 8px;
 
   border-color: #c53030;
   display: flex;
+
+  div {
+    width: 100%;
+  }
 
   svg {
     margin-right: 8px;

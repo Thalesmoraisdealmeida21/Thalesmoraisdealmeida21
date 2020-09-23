@@ -44,9 +44,15 @@ const Dashboard: React.FC = () => {
   const [modalItem, setModalItem] = useState<string>('');
 
   useEffect(() => {
-    api.get<Speeche[]>('/users/courses').then(response => {
-      setSpeeches(response.data);
-    });
+    try {
+      api.get<Speeche[]>('/users/courses').then(response => {
+        if (response) {
+          setSpeeches(response.data);
+        }
+      });
+    } catch {
+      toast('Voce ainda não possui nenhum curso');
+    }
   }, []);
 
   const handleClickOpen = useCallback(
@@ -117,6 +123,9 @@ const Dashboard: React.FC = () => {
         <h1>Minhas Palestras</h1>
 
         <Speeches>
+          {speeches.length <= 0 && (
+            <h1>Você ainda não possui nenhuma palestra</h1>
+          )}
           {speeches?.map(spc => {
             return (
               <ItemList key={spc.id}>

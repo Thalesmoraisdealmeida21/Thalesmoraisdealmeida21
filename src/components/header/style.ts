@@ -41,12 +41,30 @@ export const Content = styled.div`
   }
 `;
 
+export const UserLogo = styled.div`
+  border: 1px solid;
+  border-radius: 100%;
+  background: transparent;
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  align-content: center;
+`;
+
 export const LoginContent = styled.div`
   margin-left: auto;
-  margin-top: 8px;
   display: flex;
   flex-direction: row;
   position: relative;
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 4px;
+  }
 
   @media (max-width: 900px) {
     button {

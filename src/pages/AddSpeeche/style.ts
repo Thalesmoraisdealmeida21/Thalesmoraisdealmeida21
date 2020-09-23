@@ -23,12 +23,7 @@ export const ContainerFormAddSpeeche = styled.div`
     position: relative;
     margin-top: 200px;
     border-radius: 20px;
-    text-align: center;
     height: 700px;
-
-    div {
-      margin: 10px 0;
-    }
 
     button {
       margin-top: 130px;

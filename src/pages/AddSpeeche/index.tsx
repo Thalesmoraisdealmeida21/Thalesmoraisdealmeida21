@@ -66,15 +66,22 @@ const AddSpeeche: React.FC = () => {
       <ContainerFormAddSpeeche>
         <Form ref={formRef} onSubmit={handlAddSpeeche}>
           <h1>Nova Palestra</h1>
-          <Input id="name" name="name" placeholder="Nome da Palestra" />
+          <Input
+            label="Nome"
+            id="name"
+            name="name"
+            placeholder="Nome da Palestra"
+          />
           <Input
             id="videoLink"
+            label="Link do Video"
             name="videoLink"
             placeholder="Video. Ex wistia.com.br/video"
           />
 
           <Input
             id="price"
+            label="Preço"
             type="text"
             name="price"
             placeholder="Preço. Ex R$ 100.00"

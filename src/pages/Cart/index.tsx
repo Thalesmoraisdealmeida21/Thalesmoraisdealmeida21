@@ -5,7 +5,12 @@ import { toast } from 'react-toastify';
 import Header from '../../components/header';
 import api from '../../services/api';
 import { useCart } from '../../hooks/Cart';
-import { ContainerDashboard, ItemCart } from './style';
+import {
+  ContainerDashboard,
+  ItemCart,
+  CardCart,
+  HeaderItemsCart,
+} from './style';
 
 const Cart: React.FC = () => {
   const { courses, removeTheCart, clearCart } = useCart();
@@ -52,36 +57,43 @@ const Cart: React.FC = () => {
       <Header position={3} />
 
       <ContainerDashboard>
-        <h1>Carrinho</h1>
+        <CardCart>
+          <HeaderItemsCart>
+            <h1>Carrinho</h1>
+          </HeaderItemsCart>
+          {cartItems.map(course => (
+            <ItemCart key={course.id}>
+              <h2>{course.name}</h2>
 
-        {cartItems.map(course => (
-          <ItemCart key={course.id}>
-            <h2>{course.name}</h2>
+              <h2>
+                {Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(course.price)}
+              </h2>
+              <FiTrash
+                onClick={() => {
+                  removeCourse(course.id);
+                }}
+                size={25}
+              />
+            </ItemCart>
+          ))}
 
-            <h2>
-              {Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(course.price)}
-            </h2>
-            <FiTrash
-              onClick={() => {
-                removeCourse(course.id);
-              }}
-              size={25}
-            />
-          </ItemCart>
-        ))}
+          {/* <strong>Total: R$ 120,0</strong> */}
 
-        {/* <strong>Total: R$ 120,0</strong> */}
-
-        {cartItems.length <= 0 ? (
-          <h1>O Carrinho esta vazio</h1>
-        ) : (
-          <button onClick={addCoursesToUser} type="button">
-            Finalizar Pedido
-          </button>
-        )}
+          {cartItems.length <= 0 ? (
+            <h1>O Carrinho esta vazio</h1>
+          ) : (
+            <div>
+              <strong>Total: </strong>
+              <span>R$ 190,00</span>
+              <button onClick={addCoursesToUser} type="button">
+                Finalizar Pedido
+              </button>
+            </div>
+          )}
+        </CardCart>
       </ContainerDashboard>
     </>
   );

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ContainerDashboard = styled.div`
-  margin: auto 16vw;
+  margin: auto 15vw;
   position: static;
 
   padding: 40px 0;
@@ -57,7 +57,7 @@ export const ItemList = styled.div`
     flex-direction: column;
   }
   h2 {
-    margin-top: 16px;
+    margin-top: 45px;
     margin-left: 16px;
   }
 
