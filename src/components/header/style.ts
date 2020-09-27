@@ -7,6 +7,7 @@ interface DropdownProps {
 export const Container = styled.div`
   background: #4d96ca;
   position: fixed;
+
   width: 100%;
 `;
 
@@ -100,6 +101,7 @@ export const LoginContent = styled.div`
       position: absolute;
       left: 99%;
       right: 10%;
+      overflow: hidden;
       margin-right: 30px;
     }
   }
@@ -125,6 +127,8 @@ export const LoginContent = styled.div`
     span {
       color: white;
       font-weight: 500;
+      overflow: hidden;
+      white-space: nowrap;
     }
   }
   img {

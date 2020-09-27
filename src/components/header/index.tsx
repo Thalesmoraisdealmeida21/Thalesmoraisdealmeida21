@@ -7,6 +7,8 @@ import {
   FiUser,
 } from 'react-icons/fi';
 
+import { MdCreate } from 'react-icons/md';
+
 import { MdAddShoppingCart, MdOndemandVideo } from 'react-icons/md';
 import { Link, useHistory } from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -174,6 +176,17 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
             }}
             label="Usuários"
             icon={<FiUser />}
+          />
+
+          <BottomNavigationAction
+            style={{
+              display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
+            }}
+            onClick={() => {
+              history.push('/posts');
+            }}
+            label="Postagens"
+            icon={<MdCreate />}
           />
         </BottomNavigation>
       </Container>

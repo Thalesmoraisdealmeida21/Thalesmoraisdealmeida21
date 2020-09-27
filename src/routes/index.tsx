@@ -18,7 +18,8 @@ import SendMailAllUsers from '../pages/SendMailAllUsers';
 import ProfilePage from '../pages/Profile';
 
 import ForgotPassword from '../pages/ForgotPassword';
-
+import ListPost from '../pages/Posts/ListPost';
+import ViewPost from '../pages/Posts/ViewPost';
 import Cart from '../pages/Cart';
 
 const Routes: React.FC = () => {
@@ -42,6 +43,9 @@ const Routes: React.FC = () => {
       <Route path="/users/sendmail" isPrivate component={SendMailAllUsers} />
       <Route path="/users/sendmail/:uuidUser" isPrivate component={SendMail} />
       <Route path="/users" isPrivate component={User} />
+
+      <Route path="/posts/new" isPrivate component={ViewPost} />
+      <Route path="/posts" isPrivate component={ListPost} />
     </Switch>
   );
 };
