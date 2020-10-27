@@ -5,6 +5,7 @@ import GlobalStyle from './styles/global';
 
 import { AuthProvider } from './hooks/AuthContext';
 import { CartProvider } from './hooks/Cart';
+import Footer from './components/footer';
 
 import Routes from './routes';
 
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <AuthProvider>
           <CartProvider>
             <Routes />
+            <Footer />
           </CartProvider>
         </AuthProvider>
         <ToastContainer
@@ -29,6 +31,7 @@ const App: React.FC = () => {
           pauseOnHover
         />
       </BrowserRouter>
+
       <GlobalStyle />
     </>
   );

@@ -54,6 +54,7 @@ interface User {
   addressNumber: string;
   complement: string;
   cpfCnpj: string;
+  uf: string;
 }
 interface CardData {
   card_holder_name: string;
@@ -280,6 +281,16 @@ const Checkout: React.FC = () => {
                 />
 
                 <InputGroup>
+                  <Input
+                    value={userData.uf}
+                    label="UF"
+                    name="uf"
+                    maxLength={2}
+                    type="text"
+                    onChange={evt => {
+                      setUserData({ ...userData, uf: evt.target.value });
+                    }}
+                  />
                   <Input
                     value={userData.address}
                     label="Endereço"
