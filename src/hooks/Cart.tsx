@@ -33,7 +33,7 @@ const CartProvider: React.FC = ({ children }) => {
   }, []);
 
   const addToCart = useCallback(
-    (courseForInsert: Course) => {
+    async (courseForInsert: Course) => {
       const alreadyExists = courses.filter(
         crs => crs.id === courseForInsert.id,
       );
@@ -44,9 +44,10 @@ const CartProvider: React.FC = ({ children }) => {
         });
       } else {
         const newCourses = [...courses, courseForInsert];
+
         setCourses(newCourses);
 
-        localStorage.setItem('@ELearned:Cart', JSON.stringify(courses));
+        localStorage.setItem('@ELearned:Cart', JSON.stringify(newCourses));
         toast('Palestra adicionado as minhas palestras com sucesso', {
           type: 'success',
         });

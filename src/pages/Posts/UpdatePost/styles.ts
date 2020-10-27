@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const DeleteButton = styled.button`
-  margin-top: 15%;
-  margin-left: 15%;
-  position: absolute;
-  background: #4d96ca;
-  border-radius: 50%;
-  color: white;
-  padding: 7px;
-`;
 export const DropzoneContainer = styled.div`
   height: 250px;
   border: 3px solid #4d96ca82;
@@ -16,11 +7,6 @@ export const DropzoneContainer = styled.div`
   background: #4d96ca82;
   cursor: pointer;
   border-style: dotted;
-
-  div {
-    display: flex;
-    flex-direction: column;
-  }
 
   p {
     opacity: 1;
@@ -40,10 +26,6 @@ export const FormPostContainer = styled.div`
   max-width: 100vw;
   display: flex;
   flex-direction: column;
-
-  svg {
-    margin: 0 auto;
-  }
 
   > button {
     margin-top: 150px;

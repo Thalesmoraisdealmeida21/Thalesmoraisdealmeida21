@@ -28,7 +28,7 @@ const User: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [editor, setEditor] = useState();
 
-  const { uuidUser } = useParams();
+  const { uuidUser } = useParams<{ uuidUser: string }>();
 
   useEffect(() => {
     api.get<UserDTO>(`/users/${uuidUser}`).then(response => {
@@ -38,7 +38,6 @@ const User: React.FC = () => {
 
   const sendMail = useCallback(
     async (data: SendMailDTOs) => {
-      console.log(data);
       try {
         await api.post('/users/sendmail', {
           ...data,

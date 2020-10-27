@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Button } from '@material-ui/core';
-import { MdDelete } from 'react-icons/md';
+import { MdCreate, MdDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import {
@@ -82,7 +82,10 @@ const ListPost: React.FC = () => {
           {posts.map(post => {
             return (
               <PostCard>
-                <img alt="Imagem" src={post.image} />
+                <img
+                  alt="postimage"
+                  src={`${process.env.REACT_APP_API_URL}/files/${post.image}`}
+                />
                 <ContentPost>
                   <TitlePost>{post.name}</TitlePost>
                   <p>{post.resume}</p>
@@ -95,6 +98,13 @@ const ListPost: React.FC = () => {
                     }}
                   >
                     <MdDelete />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      history.push(`/posts/${post.id}`);
+                    }}
+                  >
+                    <MdCreate />
                   </Button>
                 </FooterCard>
               </PostCard>

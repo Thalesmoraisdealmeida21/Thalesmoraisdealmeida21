@@ -51,6 +51,24 @@ const AddSpeeche: React.FC = () => {
     },
     [addToCart],
   );
+
+  const addToMyUser = useCallback(
+    async idCourse => {
+      try {
+        await api.post('users/courses', {
+          userId: user.id,
+          courses: [idCourse],
+        });
+
+        toast('Curso adicionado com sucesso', {
+          type: 'success',
+        });
+      } catch {
+        console.log('Deu ruim');
+      }
+    },
+    [user.id],
+  );
   return (
     <>
       <Header position={1} />
@@ -98,6 +116,19 @@ const AddSpeeche: React.FC = () => {
                         <FiEdit size={20} />
                         Editar
                       </Link>
+                    </Button>
+
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      style={{
+                        display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
+                      }}
+                      onClick={() => {
+                        addToMyUser(course.id);
+                      }}
+                    >
+                      <FiEdit size={20} />+ usuario
                     </Button>
                   </div>
                 </AddToCartButton>

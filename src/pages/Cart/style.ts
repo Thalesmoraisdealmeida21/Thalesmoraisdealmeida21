@@ -22,7 +22,7 @@ export const ContainerDashboard = styled.div`
     color: white;
     text-transform: uppercase;
     font-weight: bold;
-    margin-left: 84%;
+    margin-left: 75%;
     border-radius: 10px;
   }
 `;
@@ -55,12 +55,12 @@ export const CardCart = styled.div`
     margin-left: auto;
     margin-bottom: 32px;
     strong {
-      margin-left: 85%;
-      font-size: 32px;
+      margin-left: 70%;
+      font-size: 24px;
     }
 
     span {
-      font-size: 32px;
+      font-size: 24px;
       color: green;
       margin-bottom: 32px;
     }

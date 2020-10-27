@@ -7,6 +7,7 @@
     "@editorjs/editorjs": "^2.18.0",
     "@editorjs/header": "^2.5.0",
     "@material-ui/core": "^4.11.0",
+    "@material-ui/pickers": "^3.2.10",
     "@natterstefan/react-editor-js": "^0.3.1",
     "@react-native-community/async-storage": "^1.12.0",
     "@sweetalert/with-react": "^0.1.1",
@@ -83,12 +84,14 @@
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
     "eslint-config-airbnb": "^18.2.0",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
-    "prettier": "^2.1.1"
+    "pagarme-js-types": "^2.4.0",
+    "prettier": "^2.1.2",
+    "prettier-eslint": "^11.0.0"
   }
 }

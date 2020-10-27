@@ -20,7 +20,10 @@ import ProfilePage from '../pages/Profile';
 import ForgotPassword from '../pages/ForgotPassword';
 import ListPost from '../pages/Posts/ListPost';
 import ViewPost from '../pages/Posts/ViewPost';
+import UpdatePost from '../pages/Posts/UpdatePost';
 import Cart from '../pages/Cart';
+import Order from '../pages/order';
+import Checkout from '../pages/Checkout';
 
 const Routes: React.FC = () => {
   return (
@@ -31,6 +34,8 @@ const Routes: React.FC = () => {
 
       <Route path="/video/:id" isPrivate component={ViewSpeeche} />
       <Route path="/cart" isPrivate component={Cart} />
+      <Route path="/checkout/:order" isPrivate component={Checkout} />
+      <Route path="/orders" isPrivate component={Order} />
       <Route path="/dashboard" isPrivate component={Dashboard} />
       <Route path="/add-speeche" isPrivate component={AddSpeeche} />
       <Route path="/profile" isPrivate component={ProfilePage} />
@@ -45,6 +50,7 @@ const Routes: React.FC = () => {
       <Route path="/users" isPrivate component={User} />
 
       <Route path="/posts/new" isPrivate component={ViewPost} />
+      <Route path="/posts/:id" isPrivate component={UpdatePost} />
       <Route path="/posts" isPrivate component={ListPost} />
     </Switch>
   );

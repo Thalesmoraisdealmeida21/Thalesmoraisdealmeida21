@@ -27,7 +27,6 @@ const SignIn: React.FC = () => {
           type: 'success',
         });
       } catch (err) {
-        console.log(err);
         toast('Usuário ou senha incorretos :(', {
           type: 'error',
         });
