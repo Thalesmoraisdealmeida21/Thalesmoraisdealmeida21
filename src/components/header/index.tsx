@@ -7,9 +7,9 @@ import {
   FiUser,
 } from 'react-icons/fi';
 
-import { MdCreate } from 'react-icons/md';
+// import { MdCreate } from 'react-icons/md';
 
-import { MdAddShoppingCart, MdOndemandVideo, MdList } from 'react-icons/md';
+import { MdAddShoppingCart, MdOndemandVideo } from 'react-icons/md';
 import { Link, useHistory } from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';

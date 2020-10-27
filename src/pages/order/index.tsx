@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ContainerOrders, ListContainer, Order } from './styles';
 
@@ -22,7 +22,7 @@ interface Order {
 const ListOrders: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
 
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     async function getOrders(): Promise<void> {

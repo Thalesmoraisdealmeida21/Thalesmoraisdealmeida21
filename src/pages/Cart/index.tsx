@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
 import { FiTrash } from 'react-icons/fi';
-import { toast } from 'react-toastify';
+
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/header';
 import api from '../../services/api';
@@ -17,7 +17,7 @@ import {
 import { useAuth } from '../../hooks/AuthContext';
 
 const Cart: React.FC = () => {
-  const { courses, removeTheCart, clearCart } = useCart();
+  const { courses, removeTheCart } = useCart();
   const [cartItems, setCartItems] = useState(courses);
   const [totalCart, setTotalCart] = useState<number>(0);
 
@@ -69,27 +69,6 @@ const Cart: React.FC = () => {
     [courses, removeTheCart],
   );
 
-  const addCoursesToUser = useCallback(async () => {
-    try {
-      const newItem = cartItems.map(coursToinsert => {
-        return { course_id: coursToinsert.id };
-      });
-
-      const coursesToInsert = { courses: newItem };
-
-      await api.post('/users/courses', coursesToInsert);
-
-      toast('Registro inserido com sucesso', {
-        type: 'success',
-      });
-
-      clearCart();
-    } catch (err) {
-      toast('Voce ja possui as palestras que estão no seu carrinho', {
-        type: 'error',
-      });
-    }
-  }, [clearCart, cartItems]);
   return (
     <>
       <Header position={3} />

@@ -10,11 +10,11 @@ import pagarme from 'pagarme';
 import { toast } from 'react-toastify';
 import { Form } from '@unform/web';
 import Radio from '@material-ui/core/Radio';
-import { string } from 'yup';
+
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
-import * as Yup from 'yup';
+
 import Input from '../../components/input';
 import api from '../../services/api';
 import Header from '../../components/header';
@@ -128,7 +128,7 @@ const Checkout: React.FC = () => {
           api_key: process.env.REACT_APP_PAGARME_ENCRYPTION_KEY,
         });
 
-        const expirationDate = cardExpirationDateMonth + cardExpirationDateYear;
+        // const expirationDate = cardExpirationDateMonth + cardExpirationDateYear;
 
         const card_hash = await client.security.encrypt({
           card_cvv,
