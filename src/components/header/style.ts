@@ -129,6 +129,8 @@ export const LoginContent = styled.div`
       font-weight: 500;
       overflow: hidden;
       white-space: nowrap;
+      width: 105px;
+}
     }
   }
   img {

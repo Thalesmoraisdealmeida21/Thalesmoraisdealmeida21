@@ -48,6 +48,7 @@ const Header: React.FC = () => {
               />
 
               <a
+                target="__blank"
                 href={`https://api.whatsapp.com/send?phone=5562981933699&text=${textMessage}`}
               >
                 <MdSend size={16} />

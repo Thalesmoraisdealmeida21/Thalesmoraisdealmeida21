@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ContainerFormAddSpeeche = styled.div`
   margin: auto 10vw;
-  position: static;
+  position: inherit;
 
   padding: 20px 0;
   max-width: 100vw;
@@ -20,11 +20,9 @@ export const ContainerFormAddSpeeche = styled.div`
   form {
     padding: 30px;
     background: #fff;
-    position: relative;
     margin-top: 200px;
     border-radius: 20px;
     height: 700px;
-
     button {
       margin-top: 130px;
       width: 20vw;

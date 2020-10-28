@@ -73,6 +73,7 @@ export const AddToCartButton = styled.div`
     font-size: 12px;
     margin-top: 40px;
     text-align: center;
+    position: inherit;
   }
 
   a {

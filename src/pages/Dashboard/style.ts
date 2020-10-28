@@ -73,6 +73,7 @@ export const ItemList = styled.div`
     border-radius: 50%;
     border: transparent;
     width: 80px;
+    position: inherit;
     margin-top: 20px;
 
     margin-left: 16px;

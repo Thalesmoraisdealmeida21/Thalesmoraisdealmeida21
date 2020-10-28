@@ -7,8 +7,7 @@ interface DropdownProps {
 export const Container = styled.div`
   width: 100%;
   position: fixed;
-  top: 50vh;
-
+  top: 90vh;
   p {
     text-align: center;
     padding: 25px;
@@ -93,7 +92,7 @@ export const TellWhats = styled.div<DropdownProps>`
 
   button {
     position: fixed;
-    margin-top: ${props => (props.showDrop ? '260px' : '10px')};
+
     width: 300px;
 
     transition: 1s;
@@ -106,7 +105,10 @@ export const TellWhats = styled.div<DropdownProps>`
 
 export const CollapseDiv = styled.div<DropdownProps>`
   display: block;
-  transition: 1s;
+
   height: ${props => (props.showDrop ? '0px' : '250px')};
   visibility: ${props => (props.showDrop ? 'hidden' : 'visible')};
+  top: -268px;
+  width: 300px;
+  position: absolute;
 `;
