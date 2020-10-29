@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useState, useCallback } from 'react';
 import { FiPlay } from 'react-icons/fi';
 import Dialog from '@material-ui/core/Dialog';
@@ -6,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Checkbox from '@material-ui/core/Checkbox';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ReactPlayer from 'react-player';
@@ -17,6 +20,7 @@ import {
   Speeches,
   ContainerDashboard,
   ExpiredContent,
+  ConfirmModal,
 } from './style';
 
 interface Speeche {
@@ -42,6 +46,7 @@ const Dashboard: React.FC = () => {
   const [speeches, setSpeeches] = useState<Speeche[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [modalItem, setModalItem] = useState<string>('');
+  const [confirm, setConfirm] = useState(false);
 
   useEffect(() => {
     try {
@@ -75,16 +80,24 @@ const Dashboard: React.FC = () => {
 
   const redirectToVideo = useCallback(async () => {
     try {
+      if (!confirm) {
+        toast('Concorde com os termos antes de prosseguir', {
+          type: 'warning',
+        });
+
+        document.getElementById('terms')?.focus();
+        return false;
+      }
       await api.put('/users/courses', {
         course_id: modalItem,
       });
+      history.push(`/video/${modalItem}`);
     } catch (err) {
       toast('Ocorreu um erro', {
         type: 'error',
       });
     }
-    history.push(`/video/${modalItem}`);
-  }, [history, modalItem]);
+  }, [history, modalItem, confirm]);
   return (
     <>
       <Header />
@@ -94,6 +107,8 @@ const Dashboard: React.FC = () => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        fullWidth
+        maxWidth="lg"
       >
         <DialogTitle id="alert-dialog-title">
           ATENÇÃO !!!
@@ -109,13 +124,32 @@ const Dashboard: React.FC = () => {
             um prazo de 24 hroas para assistir a paletra. Passado este periodo
             não poderá mais acessar o conteúdo
           </DialogContentText>
+
+          <ConfirmModal>
+            <p
+              onClick={() => {
+                setConfirm(!confirm);
+              }}
+            >
+              <Checkbox
+                id="terms"
+                checked={confirm}
+                onChange={() => {
+                  setConfirm(!confirm);
+                }}
+              />
+              Li e concordo que, ao prosseguir para a próxima etapa, terei
+              acesso à palestra por 24h, tendo a ciência que, passado esse
+              período, não terei mais acesso aos estudos.
+            </p>
+          </ConfirmModal>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={redirectToVideo} color="primary" autoFocus>
-            confirmar
+          <Button onClick={redirectToVideo} color="primary">
+            Iniciar minha palestra!
           </Button>
         </DialogActions>
       </Dialog>

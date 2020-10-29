@@ -25,6 +25,26 @@ export const ContainerDashboard = styled.div`
   }
 `;
 
+export const ConfirmModal = styled.div`
+  p {
+    text-align: center;
+    color: red;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  span {
+    &:focus {
+      background-color: rgb(224 220 222 / 15%);
+    }
+  }
+`;
+
 export const Speeches = styled.div`
   display: flex;
   flex-direction: column;

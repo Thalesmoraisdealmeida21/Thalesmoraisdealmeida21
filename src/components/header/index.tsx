@@ -96,7 +96,7 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
               <h1>{userLogo}</h1>
             </UserLogo>
             <div>
-              <strong>Bem Vindo</strong>
+              <strong>Bem-Vindo</strong>
               <span>{user.name}</span>
             </div>
             <Button
