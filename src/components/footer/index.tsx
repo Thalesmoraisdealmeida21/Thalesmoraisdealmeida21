@@ -43,6 +43,13 @@ const Header: React.FC = () => {
                 onChange={evt => {
                   setTextMessage(evt.target.value);
                 }}
+                onKeyDown={evt => {
+                  if (evt.key === 'Enter') {
+                    window.open(
+                      `https://api.whatsapp.com/send?phone=5562981933699&text=${textMessage}`,
+                    );
+                  }
+                }}
                 type="text"
                 placeholder="Digite sua dúvida"
               />
