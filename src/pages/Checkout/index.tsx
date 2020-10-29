@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 
+// import * as Yup from 'yup';
 import Input from '../../components/input';
 import api from '../../services/api';
 import Header from '../../components/header';
@@ -125,6 +126,13 @@ const Checkout: React.FC = () => {
           return courseItem.id;
         });
 
+        formRef.current?.setErrors({});
+
+        // const schema = Yup.object().shape({
+        //   name: Yup.string().required(),
+        //   cpfCnpj: Yup.string().required(),
+        // });
+
         const client = await pagarme.client.connect({
           api_key: process.env.REACT_APP_PAGARME_ENCRYPTION_KEY,
         });
@@ -132,11 +140,11 @@ const Checkout: React.FC = () => {
         // const expirationDate = cardExpirationDateMonth + cardExpirationDateYear;
 
         const card_hash = await client.security.encrypt({
-          card_cvv,
+          card_number,
+          card_holder_name,
           card_expiration_date:
             cardExpirationDateMonth + cardExpirationDateYear,
-          card_holder_name,
-          card_number,
+          card_cvv,
         });
 
         const response = await api.post<TransactionStatus>(
