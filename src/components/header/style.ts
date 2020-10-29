@@ -130,7 +130,6 @@ export const LoginContent = styled.div`
       overflow: hidden;
       white-space: nowrap;
       width: 105px;
-}
     }
   }
   img {

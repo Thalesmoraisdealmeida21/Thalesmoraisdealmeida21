@@ -64,7 +64,7 @@ const AddSpeeche: React.FC = () => {
           type: 'success',
         });
       } catch {
-        console.log('Deu ruim');
+        //
       }
     },
     [user.id],

@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import {
   FiChevronDown,
   FiShoppingCart,
-  FiArrowLeft,
   FiPlusSquare,
   FiUser,
 } from 'react-icons/fi';
@@ -28,7 +27,7 @@ import { useAuth } from '../../hooks/AuthContext';
 
 import { useCart } from '../../hooks/Cart';
 
-import logo from '../../assets/logoRounded.svg';
+import logo from '../../assets/logo.svg';
 // import profile from '../../assets/profile.jpg';
 
 interface PositionMenu {
@@ -46,9 +45,9 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
 
   const history = useHistory();
 
-  const goBack = useCallback(() => {
-    history.goBack();
-  }, [history]);
+  // const goBack = useCallback(() => {
+  //   history.goBack();
+  // }, [history]);
 
   const { courses } = useCart();
 
@@ -88,9 +87,9 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
     <>
       <Container>
         <Content>
-          <img src={logo} alt="Logo" />
+          <img src={logo} width="300px" alt="Logo" />
 
-          <FiArrowLeft onClick={goBack} size={40} color="white" />
+          {/* <FiArrowLeft onClick={goBack} size={40} color="white" /> */}
 
           <LoginContent>
             <UserLogo>
