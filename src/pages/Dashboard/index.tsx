@@ -78,6 +78,7 @@ const Dashboard: React.FC = () => {
     setOpenModal(false);
   }, []);
 
+  // eslint-disable-next-line consistent-return
   const redirectToVideo = useCallback(async () => {
     try {
       if (!confirm) {
@@ -163,7 +164,7 @@ const Dashboard: React.FC = () => {
           {speeches?.map(spc => {
             return (
               <ItemList key={spc.id}>
-                <Button disabled={spc.expired} type="button">
+                <Button disabled={spc.expired} disableRipple type="button">
                   <FiPlay
                     onClick={() => {
                       handleClickOpen(spc.id);

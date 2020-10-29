@@ -97,6 +97,7 @@ const AddSpeeche: React.FC = () => {
                       variant="outlined"
                       color="primary"
                       type="button"
+                      disableRipple
                       onClick={() => {
                         handleAddToMySpeeches(course);
                       }}
@@ -106,6 +107,7 @@ const AddSpeeche: React.FC = () => {
                     </Button>
 
                     <Button
+                      disableRipple
                       variant="outlined"
                       color="primary"
                       style={{
@@ -119,6 +121,7 @@ const AddSpeeche: React.FC = () => {
                     </Button>
 
                     <Button
+                      disableRipple
                       variant="outlined"
                       color="primary"
                       style={{
