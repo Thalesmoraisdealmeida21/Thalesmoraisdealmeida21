@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable camelcase */
 import React, {
   useCallback,
@@ -16,8 +17,12 @@ import { useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 
 // import * as Yup from 'yup';
+import * as Yup from 'yup';
+import axios from 'axios';
 import Input from '../../components/input';
+
 import api from '../../services/api';
+
 import Header from '../../components/header';
 import {
   ContainerDashboard,
@@ -33,6 +38,7 @@ import {
 
 import { useAuth } from '../../hooks/AuthContext';
 import { useCart } from '../../hooks/Cart';
+import getValidationErrors from '../../utils/getValidationErros';
 
 interface TransactionStatus {
   status: string;
@@ -42,6 +48,15 @@ interface TransactionStatus {
   boleto_url: string;
   boleto_expiration_date: Date;
   boleto_barcode: string;
+}
+
+interface UF {
+  sigla: string;
+  nome: string;
+}
+
+interface City {
+  nome: string;
 }
 
 interface User {
@@ -63,7 +78,17 @@ interface CardData {
   card_cvv: string;
   card_expiration_date: string;
   amount: number;
-  user: User;
+  name: string;
+  email: string;
+  telephone: string;
+  cep: string;
+  city: string;
+  address: string;
+  neighborhood: string;
+  addressNumber: string;
+  complement: string;
+  cpfCnpj: string;
+  uf: string;
 }
 
 interface Order {
@@ -84,6 +109,8 @@ const Checkout: React.FC = () => {
   const [paymentMethod, setPaymentMethod] = useState<string>('creditCard');
   const [orderFound, setOrderFound] = useState<Order>({} as Order);
   const { order } = useParams<{ order: string }>();
+  const [ufs, setUfs] = useState<UF[]>([]);
+
   const [cardExpirationDateMonth, setCardExpirationDateMonth] = useState<
     string
   >('00');
@@ -96,12 +123,37 @@ const Checkout: React.FC = () => {
   const { courses, clearCart } = useCart();
   const history = useHistory();
 
+  const cpfCnpjMask = useCallback((value: string) => {
+    let cpfCnpjFormatted = '';
+
+    cpfCnpjFormatted = value.replace(
+      /(\d{3})(\d{3})(\d{3})(\d{2})/g,
+      '$1.$2.$3-$4',
+    );
+
+    if (value.length > 11) {
+      const newValue = value.replace(/(\.|\/|\-)/g, '');
+      cpfCnpjFormatted = newValue.replace(
+        /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,
+        '$1.$2.$3/$4-$5',
+      );
+    }
+
+    return cpfCnpjFormatted === '' ? value : cpfCnpjFormatted;
+  }, []);
+
   useEffect(() => {
     async function getUserData(): Promise<void> {
       const response = await api.get<User>(`users/${user.id}`);
       setUserData(response.data);
       const responseOrder = await api.get<Order>(`orders/${order}`);
       setOrderFound(responseOrder.data);
+
+      const ufResponse = await axios.get<UF[]>(
+        'https://servicodados.ibge.gov.br/api/v1/localidades/estados/',
+      );
+
+      setUfs(ufResponse.data);
     }
 
     getUserData();
@@ -113,6 +165,7 @@ const Checkout: React.FC = () => {
     },
     [],
   );
+
   const handlePay = useCallback(
     async ({
       card_cvv,
@@ -120,22 +173,93 @@ const Checkout: React.FC = () => {
       card_holder_name,
       card_number,
       amount,
+      name,
+      cpfCnpj,
+      neighborhood,
+      address,
+      addressNumber,
+      cep,
+      city,
+      complement,
+      email,
+      telephone,
+      uf,
     }: CardData) => {
       try {
         const coursesIds = courses.map(courseItem => {
           return courseItem.id;
         });
 
+        const items = courses.map(cours => {
+          return {
+            id: cours.id,
+            title: cours.name,
+            unit_price: Number(cours.price),
+            quantity: 1,
+            tangible: false,
+          };
+        });
+
         formRef.current?.setErrors({});
 
-        // const schema = Yup.object().shape({
-        //   name: Yup.string().required(),
-        //   cpfCnpj: Yup.string().required(),
-        // });
+        const schema = Yup.object().shape({
+          name: Yup.string().required(
+            'Preencha todos os campos, campo nome não foi informado',
+          ),
+          cpfCnpj: Yup.string()
+            .trim()
+            .matches(
+              /(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/,
+              'Informe um CPF / CNPJ Válido',
+            )
+            .required('Informe um CPF / CNPJ'),
+          email: Yup.string()
+            .email('Informe um e-mail válido')
+            .required('Informe um e-mail'),
+          cep: Yup.string()
+            .trim()
+            .min(8, 'Informe um CEP Válido')
+            .max(11, 'Informe um CEP Válido'),
+          telephone: Yup.number().required(
+            'Preencha todos os campos, informe o seu telefone',
+          ),
+          city: Yup.string().required('Informe sua Cidade'),
+          uf: Yup.string(),
+          card_holder_name: Yup.string().required('Informe o nome do cartão'),
+          card_cvv: Yup.string()
+            .max(3, 'Informe um CVV válido')
+            .min(3, 'Informe um CVV válido')
+            .required('Informe o um CVV'),
+          card_number: Yup.string().required('Informe o número do cartão'),
+        });
 
         const client = await pagarme.client.connect({
           api_key: process.env.REACT_APP_PAGARME_ENCRYPTION_KEY,
         });
+
+        await schema.validate(
+          {
+            card_cvv,
+            card_expiration_date,
+            card_holder_name,
+            card_number,
+            amount,
+            name,
+            cpfCnpj,
+            neighborhood,
+            address,
+            addressNumber,
+            cep,
+            city,
+            complement,
+            email,
+            telephone,
+            uf,
+          },
+          {
+            abortEarly: false,
+          },
+        );
 
         // const expirationDate = cardExpirationDateMonth + cardExpirationDateYear;
 
@@ -154,6 +278,7 @@ const Checkout: React.FC = () => {
             amount: amount * 100,
             payment_method: paymentMethod,
             user: userData,
+            items,
           },
         );
         if (response.data.boleto_url) {
@@ -185,9 +310,22 @@ const Checkout: React.FC = () => {
           );
         }
       } catch (err) {
-        toast('Ocorreu um erro ao efetuar a transação', {
-          type: 'error',
-        });
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+          const errorsArray = Object.entries(errors);
+          errorsArray.map(error => {
+            toast(error[1], {
+              type: 'error',
+            });
+
+            return null;
+          });
+        } else {
+          toast('Ocorreu um erro ao efetuar a transação, ', {
+            type: 'error',
+          });
+        }
       }
     },
     [
@@ -233,21 +371,12 @@ const Checkout: React.FC = () => {
                   onChange={evt => {
                     setUserData({
                       ...userData,
-                      cpfCnpj: evt.target.value,
+                      cpfCnpj: cpfCnpjMask(evt.target.value),
                     });
                   }}
                 />
 
                 <InputGroup>
-                  <Input
-                    value={userData.email}
-                    label="E-mail"
-                    name="email"
-                    type="text"
-                    onChange={evt => {
-                      setUserData({ ...userData, email: evt.target.value });
-                    }}
-                  />
                   <Input
                     value={userData.cep}
                     label="CEP"
@@ -273,23 +402,70 @@ const Checkout: React.FC = () => {
                       });
                     }}
                   />
+
+                  <Input
+                    value={userData.email}
+                    label="E-mail"
+                    name="email"
+                    type="email"
+                    onChange={evt => {
+                      setUserData({
+                        ...userData,
+                        email: evt.target.value,
+                      });
+                    }}
+                  />
                 </InputGroup>
               </Section>
               <Section>
                 <TitleSection>Endereço</TitleSection>
 
-                <Input
-                  value={userData.city}
-                  label="Cidade"
-                  name="city"
-                  type="text"
-                  onChange={evt => {
-                    setUserData({ ...userData, city: evt.target.value });
-                  }}
-                />
+                <InputGroup>
+                  <SelectGroup style={{ width: '100px' }}>
+                    <span style={{ marginLeft: '10px' }}>UF</span>
+                    <div style={{ flex: 1, width: '150px' }}>
+                      <select
+                        placeholder="UF"
+                        value={userData.uf}
+                        style={{ width: '80px' }}
+                        name="uf"
+                        id="uf"
+                        onChange={evt => {
+                          setUserData({ ...userData, uf: evt.target.value });
+                        }}
+                      >
+                        {ufs.map(uf => (
+                          <option value={uf.sigla}>{uf.sigla}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </SelectGroup>
+                  <div style={{ flex: 1 }}>
+                    <span style={{ marginLeft: '15px' }}>Cidade</span>
+                    <Input
+                      style={{ width: '100%' }}
+                      name="city"
+                      id="city"
+                      value={userData.city}
+                      onChange={evt => {
+                        setUserData({ ...userData, city: evt.target.value });
+                      }}
+                    />
+
+                    {/* <Input
+                      value={userData.city}
+                      label="Cidade"
+                      name="city"
+                      type="text"
+                      onChange={evt => {
+                        setUserData({ ...userData, city: evt.target.value });
+                      }}
+                    /> */}
+                  </div>
+                </InputGroup>
 
                 <InputGroup>
-                  <Input
+                  {/* <Input
                     value={userData.uf}
                     label="UF"
                     name="uf"
@@ -298,7 +474,8 @@ const Checkout: React.FC = () => {
                     onChange={evt => {
                       setUserData({ ...userData, uf: evt.target.value });
                     }}
-                  />
+                  /> */}
+
                   <Input
                     value={userData.address}
                     label="Endereço"
@@ -434,7 +611,7 @@ const Checkout: React.FC = () => {
                       id="card_cvv"
                       maxLength={3}
                       name="card_cvv"
-                      type="number"
+                      type="string"
                     />
                   </InputGroup>{' '}
                 </>

@@ -7,6 +7,10 @@ export const ContainerDashboard = styled.div`
   padding: 40px 0;
   max-width: 100vw;
 
+  @media (max-width: 710px) {
+    margin: 0vw 0vw;
+  }
+
   h1 {
     padding: 50px;
     font-size: 48px;
@@ -39,6 +43,7 @@ export const CardContainerCheckout = styled.div`
 export const InputGroup = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 
   select {
     width: 100%;
