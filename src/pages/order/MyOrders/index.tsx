@@ -8,7 +8,6 @@ import {
   ContainerMyOrders,
   Title,
   Content,
-  HeaderTable,
   Card,
   ColumnTable,
   LabelSpan,

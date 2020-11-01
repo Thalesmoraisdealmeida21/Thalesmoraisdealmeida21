@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { FiPlus, FiEdit } from 'react-icons/fi';
+import { FiEdit } from 'react-icons/fi';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
