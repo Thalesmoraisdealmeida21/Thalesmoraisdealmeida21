@@ -21,8 +21,12 @@ interface Video {
   limitAccess: Date;
   description: string;
 }
+
+interface Params {
+  id: string;
+}
 const Dashboard: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<Params>();
   const [video, setVideo] = useState<Video>({} as Video);
 
   useEffect(() => {
@@ -54,7 +58,12 @@ const Dashboard: React.FC = () => {
               : ''}
           </h2>
           <VideoContent>
-            <ReactPlayer controls url={video?.videoLink} />
+            <ReactPlayer
+              width="100%"
+              height="400px"
+              controls
+              url={video?.videoLink}
+            />
           </VideoContent>
         </ContainerVideo>
 

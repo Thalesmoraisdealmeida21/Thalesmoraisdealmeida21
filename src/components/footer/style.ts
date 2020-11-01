@@ -7,7 +7,8 @@ interface DropdownProps {
 export const Container = styled.div`
   width: 100%;
   position: fixed;
-  top: 90vh;
+  top: 88vh;
+  min-width: 100vw;
   p {
     text-align: center;
     padding: 25px;
@@ -18,11 +19,16 @@ export const Container = styled.div`
     text-decoration: none;
     background: #4d96ca;
     margin-top: 0px;
-    padding: 18px;
+    padding: 10px;
+    font-size: 16px;
+    height: 40px;
+    text-align: center;
     width: 100%;
+    border: 1px transparent;
     border-radius: 15px;
-    box-shadow: 2px 1px 4px 1px black;
+    box-shadow: 1px 1px 1px 1px;
     color: white;
+    max-width: 100%;
   }
 `;
 
@@ -39,7 +45,7 @@ export const ContainerInput = styled.div`
     border: transparent;
   }
   a {
-    margin-left: 50px;
+    margin-left: 30px;
   }
   svg {
     color: #6da8d2;
@@ -85,13 +91,16 @@ export const Close = styled.div`
 `;
 
 export const TellWhats = styled.div<DropdownProps>`
-  margin-left: 70vw;
-  width: 300px;
+  margin-left: auto;
+  width: 330px;
+  margin-right: 10px;
+
   display: block;
   overflow: hidden;
 
   button {
     position: fixed;
+    margin-bottom: 300px;
 
     width: 300px;
 

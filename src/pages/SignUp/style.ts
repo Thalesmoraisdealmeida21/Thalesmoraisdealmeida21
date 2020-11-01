@@ -13,12 +13,20 @@ export const Card = styled.div`
   margin: 0 auto;
   text-align: center;
   max-width: 100%;
-  box-shadow: 1px 1px 15px black;
-  border-radius: 15px;
+  box-shadow: 1px 1px 5px rgba(240 240 245);
+  border-radius: 8px;
   border: transparent;
   margin-top: 10vh;
-  padding-bottom: 50px;
   width: 500px;
+  height: 500px;
+  min-height: 400px;
+
+  @media (max-width: 1030px) {
+    width: 100vw;
+    margin-top: 0;
+    height: 100vh;
+    border-radius: 0px;
+  }
 
   img {
     max-width: 150px;

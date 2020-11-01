@@ -2,6 +2,21 @@ import styled from 'styled-components';
 
 export const ContainerDashboard = styled.div`
   margin: auto 15vw;
+
+  @media (max-width: 650px) {
+    margin: auto 5vw;
+
+    h2 {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
   position: static;
 
   padding: 40px 0;
@@ -60,11 +75,15 @@ export const Speeches = styled.div`
 
 export const ItemList = styled.div`
   width: 100%;
-  margin: 15px;
+  margin: 15px 0;
 
   height: 130px;
-  left: 141px;
+  left: 130px;
   top: 300px;
+
+  @media (max-width: 650px) {
+    height: 100px;
+  }
 
   background: #ffffff;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
@@ -75,9 +94,10 @@ export const ItemList = styled.div`
   div {
     display: flex;
     flex-direction: column;
+    width: 450px;
   }
   h2 {
-    margin-top: 45px;
+    margin-top: 24px;
     margin-left: 16px;
   }
 
@@ -100,6 +120,10 @@ export const ItemList = styled.div`
     transition: 0.7s;
     color: white;
 
+    @media (max-width: 650px) {
+      margin-top: 20px;
+      height: 60px;
+    }
     &:hover {
       background: white;
       border: silver;
@@ -151,10 +175,11 @@ export const AddToCartButton = styled.div`
 `;
 
 export const ExpiredContent = styled.div`
-  margin-left: auto;
+  margin-left: 0;
   color: red;
-  font-weight: bold;
-  margin-right: 32px;
+  font-weight: 400;
+  font-size: 16px;
   margin-top: auto;
+  margin-left: auto;
   margin-bottom: auto;
 `;

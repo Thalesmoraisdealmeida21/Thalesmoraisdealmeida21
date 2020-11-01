@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
 import { FiPlus, FiEdit } from 'react-icons/fi';
+import { MdAddShoppingCart } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
@@ -13,6 +14,7 @@ import {
   Speeches,
   ContainerDashboard,
   AddToCartButton,
+  Tooltip,
 } from './style';
 
 interface Course {
@@ -23,6 +25,7 @@ interface Course {
 
 const AddSpeeche: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
+
   const { addToCart } = useCart();
 
   const { user } = useAuth();
@@ -98,12 +101,17 @@ const AddSpeeche: React.FC = () => {
                       color="primary"
                       type="button"
                       disableRipple
+                      style={{
+                        borderRadius: '50%',
+                        height: '70px',
+                        width: '70px',
+                      }}
                       onClick={() => {
                         handleAddToMySpeeches(course);
                       }}
                     >
-                      <FiPlus size={20} />
-                      <span>Adicionar ao Carrinho</span>
+                      <MdAddShoppingCart size={40} />
+                      <Tooltip>Adicionar ao carrinho</Tooltip>
                     </Button>
 
                     <Button

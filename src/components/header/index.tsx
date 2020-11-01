@@ -74,11 +74,14 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
     const { name } = user;
 
     const nameArray = name.split(' ');
-
     let logoToSet = '';
-    logoToSet +=
-      nameArray[0].substring(0, 1).toUpperCase() +
-      nameArray[1].substring(0, 1).toUpperCase();
+    if (nameArray.length <= 1) {
+      logoToSet = nameArray[0].substring(0, 1).toUpperCase();
+    } else {
+      logoToSet +=
+        nameArray[0].substring(0, 1).toUpperCase() +
+        nameArray[1].substring(0, 1).toUpperCase();
+    }
 
     setUserLogo(logoToSet);
   }, [user]);
@@ -125,6 +128,13 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
                 }}
               >
                 Perfil
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  history.push('/myorders');
+                }}
+              >
+                Meus Pedidos
               </MenuItem>
               <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>

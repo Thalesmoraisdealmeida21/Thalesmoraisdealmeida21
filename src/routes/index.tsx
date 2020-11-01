@@ -24,6 +24,7 @@ import UpdatePost from '../pages/Posts/UpdatePost';
 import Cart from '../pages/Cart';
 import Order from '../pages/order';
 import Checkout from '../pages/Checkout';
+import MyOrders from '../pages/order/MyOrders';
 
 const Routes: React.FC = () => {
   return (
@@ -38,6 +39,7 @@ const Routes: React.FC = () => {
       <Route path="/orders" isPrivate component={Order} />
       <Route path="/dashboard" isPrivate component={Dashboard} />
       <Route path="/add-speeche" isPrivate component={AddSpeeche} />
+      <Route path="/myorders" isPrivate component={MyOrders} />
       <Route path="/profile" isPrivate component={ProfilePage} />
       <Route
         path="/speeche/update/:courseId"

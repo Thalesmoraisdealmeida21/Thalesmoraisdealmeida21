@@ -144,16 +144,25 @@ const Checkout: React.FC = () => {
 
   useEffect(() => {
     async function getUserData(): Promise<void> {
-      const response = await api.get<User>(`users/${user.id}`);
-      setUserData(response.data);
-      const responseOrder = await api.get<Order>(`orders/${order}`);
-      setOrderFound(responseOrder.data);
+      try {
+        const response = await api.get<User>(`users/${user.id}`);
+        setUserData(response.data);
+        const responseOrder = await api.get<Order>(`orders/${order}`);
+        setOrderFound(responseOrder.data);
 
-      const ufResponse = await axios.get<UF[]>(
-        'https://servicodados.ibge.gov.br/api/v1/localidades/estados/',
-      );
+        const ufResponse = await axios.get<UF[]>(
+          'https://servicodados.ibge.gov.br/api/v1/localidades/estados/',
+        );
 
-      setUfs(ufResponse.data);
+        setUfs(ufResponse.data);
+      } catch {
+        toast(
+          'Ocorreu um erro, por favor atualize a pagina. Se o Erro persistir contate o nosso suporte',
+          {
+            type: 'error',
+          },
+        );
+      }
     }
 
     getUserData();
@@ -225,12 +234,12 @@ const Checkout: React.FC = () => {
           ),
           city: Yup.string().required('Informe sua Cidade'),
           uf: Yup.string(),
-          card_holder_name: Yup.string().required('Informe o nome do cartão'),
-          card_cvv: Yup.string()
-            .max(3, 'Informe um CVV válido')
-            .min(3, 'Informe um CVV válido')
-            .required('Informe o um CVV'),
-          card_number: Yup.string().required('Informe o número do cartão'),
+          // card_holder_name: Yup.string().required('Informe o nome do cartão'),
+          // card_cvv: Yup.string()
+          //   .max(3, 'Informe um CVV válido')
+          //   .min(3, 'Informe um CVV válido')
+          //   .required('Informe o um CVV'),
+          // card_number: Yup.string().required('Informe o número do cartão'),
         });
 
         const client = await pagarme.client.connect({
@@ -284,7 +293,6 @@ const Checkout: React.FC = () => {
         if (response.data.boleto_url) {
           window.open(response.data.boleto_url);
         }
-        alert('Pedido Realizado com sucesso.');
 
         const dataCourse = { userId: user.id, courses: coursesIds };
 
@@ -303,11 +311,14 @@ const Checkout: React.FC = () => {
 
         if (response.data.status === 'waiting_payment') {
           toast(
-            'Pedido Realizado com sucesso. Após pagamento seu boleto sera processado em náximo 48 horas',
+            'Pedido Realizado com sucesso. Após pagamento seu boleto sera processado em no náximo 48 horas',
             {
               type: 'success',
             },
           );
+
+          history.push('/myorders');
+          clearCart();
         }
       } catch (err) {
         if (err instanceof Yup.ValidationError) {

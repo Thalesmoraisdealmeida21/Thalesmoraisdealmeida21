@@ -7,6 +7,11 @@ export const ContainerDashboard = styled.div`
   padding: 40px 0;
   max-width: 100vw;
 
+  @media (max-width: 700px) {
+    margin: auto 0vw;
+    min-width: 100vw;
+  }
+
   h1 {
     padding: 50px;
     font-size: 48px;
@@ -109,15 +114,8 @@ export const ContainerVideo = styled.div`
 `;
 
 export const VideoContent = styled.div`
-  div {
-    min-width: 350px;
-    margin: 0 auto;
-
-    @media (max-width: 800px) {
-      width: 150px;
-      margin-left: 0;
-    }
-  }
+  margin-left: auto;
+  width: 100%;
 `;
 
 export const Descritpion = styled.div``;
