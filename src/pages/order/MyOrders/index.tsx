@@ -69,47 +69,42 @@ const MyOrders: React.FC = () => {
             </ul>
           </HeaderTable> */}
 
-          {orders.map(order => {
-            return (
-              <>
-                <Card>
-                  <ColumnTable>
-                    <span>{order.numero}</span>
-                  </ColumnTable>
+          <div>
+            {orders.map(order => {
+              return (
+                <>
+                  <Card>
+                    <ColumnTable>
+                      <span>{order.numero}</span>
+                    </ColumnTable>
 
-                  <ColumnTable style={{ width: '200px' }}>
-                    <span>
-                      {Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                      }).format(order.total)}
-                    </span>
-                  </ColumnTable>
-
-                  <ColumnTable>
-                    <LabelSpan
-                      colorBg={order.status === 'paid' ? '#42BD14' : '#db6923'}
-                    >
+                    <ColumnTable style={{ width: '200px' }}>
                       <span>
-                        {order.status === 'paid'
-                          ? 'Pago'
-                          : 'Aguardando Pagamento'}
+                        {Intl.NumberFormat('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        }).format(order.total)}
                       </span>
-                    </LabelSpan>
-                  </ColumnTable>
+                    </ColumnTable>
 
-                  <ColumnTable
-                    style={{ marginLeft: 'auto', marginRight: '200px' }}
-                  >
-                    <button onClick={handleOpenModal} type="button">
-                      <MdVisibility />
-                      <span>Visualizar Cursos</span>
-                    </button>
-                  </ColumnTable>
-                </Card>
-              </>
-            );
-          })}
+                    <ColumnTable>
+                      <LabelSpan
+                        colorBg={
+                          order.status === 'paid' ? '#42BD14' : '#db6923'
+                        }
+                      >
+                        <span>
+                          {order.status === 'paid'
+                            ? 'Pago'
+                            : 'Aguardando Pagamento'}
+                        </span>
+                      </LabelSpan>
+                    </ColumnTable>
+                  </Card>
+                </>
+              );
+            })}
+          </div>
         </Content>
       </ContainerMyOrders>
     </>

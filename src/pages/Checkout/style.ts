@@ -7,8 +7,8 @@ export const ContainerDashboard = styled.div`
   padding: 40px 0;
   max-width: 100vw;
 
-  @media (max-width: 710px) {
-    margin: 0vw 0vw;
+  @media (max-width: 750px) {
+    margin: auto 0;
   }
 
   h1 {
@@ -60,13 +60,24 @@ export const DetailsPayment = styled.div`
   margin-top: 50px;
   display: flex;
   flex-direction: row;
+  width: 100%;
   strong {
     color: green;
     font-size: 2rem;
+
+    @media (max-width: 800px) {
+      font-size: 16px;
+      width: 250px;
+    }
   }
 
   button {
     margin-left: 40%;
+
+    @media (max-width: 800px) {
+      height: 40px;
+      margin-left: 20%;
+    }
   }
 `;
 

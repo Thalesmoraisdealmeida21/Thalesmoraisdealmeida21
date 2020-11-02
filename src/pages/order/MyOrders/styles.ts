@@ -11,6 +11,11 @@ interface CloseModal {
 export const ContainerMyOrders = styled.div`
   padding: 0 10vw;
   max-width: 100vw;
+  overflow: hidden;
+
+  @media (max-width: 800px) {
+    padding: 0;
+  }
 `;
 
 export const Title = styled.h1``;
@@ -20,8 +25,8 @@ export const Content = styled.div`
   flex-direction: column;
   flex: 1;
   margin-top: 200px;
-  position: absolute;
-  width: 80%;
+  position: unset;
+  width: 90%;
 `;
 
 export const HeaderTable = styled.div`
@@ -58,8 +63,16 @@ export const Card = styled.div`
 export const ColumnTable = styled.div`
   padding: 30px;
 
+  @media (max-width: 800px) {
+    padding: 20px;
+  }
+
   & + & {
     margin-left: 20px;
+
+    @media (max-width: 800px) {
+      margin-left: 0px;
+    }
   }
 
   button {

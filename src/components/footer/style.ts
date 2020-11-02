@@ -101,6 +101,7 @@ export const TellWhats = styled.div<DropdownProps>`
   button {
     position: fixed;
     margin-bottom: 300px;
+    margin-top: 30px;
 
     width: 300px;
 

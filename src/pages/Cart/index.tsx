@@ -13,6 +13,7 @@ import {
   ItemCart,
   CardCart,
   HeaderItemsCart,
+  DataCart,
 } from './style';
 import { useAuth } from '../../hooks/AuthContext';
 
@@ -97,12 +98,10 @@ const Cart: React.FC = () => {
             </ItemCart>
           ))}
 
-          {/* <strong>Total: R$ 120,0</strong> */}
-
           {cartItems.length <= 0 ? (
             <h1>O Carrinho esta vazio</h1>
           ) : (
-            <div>
+            <DataCart>
               <strong>Total: </strong>
               <span>
                 {Intl.NumberFormat('pt-BR', {
@@ -114,7 +113,7 @@ const Cart: React.FC = () => {
               <button onClick={handleCreateOrder} type="button">
                 Finalizar Pedido
               </button>
-            </div>
+            </DataCart>
           )}
         </CardCart>
       </ContainerDashboard>

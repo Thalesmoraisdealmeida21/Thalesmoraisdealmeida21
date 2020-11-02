@@ -38,6 +38,33 @@ const Profile: React.FC = () => {
     getUserData();
   }, [user.id]);
 
+  const telephoneMask = useCallback(
+    (v: string) => {
+      let valFormatted = v.replace(/\D/g, ''); // Remove tudo o que não é dígito
+      valFormatted = valFormatted.replace(/^0/, '');
+
+      if (valFormatted.length > 10) {
+        valFormatted = valFormatted.replace(
+          /^(\d\d)(\d{5})(\d{4}).*/,
+          '($1) $2-$3',
+        );
+      } else if (valFormatted.length > 5) {
+        valFormatted = valFormatted.replace(
+          /^(\d\d)(\d{4})(\d{0,4}).*/,
+          '($1) $2-$3',
+        );
+      } else if (valFormatted.length > 2) {
+        valFormatted = valFormatted.replace(/^(\d\d)(\d{0,5})/, '($1) $2');
+      } else {
+        valFormatted = valFormatted.replace(/^(\d*)/, '($1');
+      }
+
+      console.log(userData.telephone);
+      return valFormatted;
+    },
+    [userData],
+  );
+
   const handleUpdateProfile = useCallback(async () => {
     try {
       await api.put('/users', userData);
@@ -89,7 +116,10 @@ const Profile: React.FC = () => {
                   name="telephone"
                   type="text"
                   onChange={evt => {
-                    setUserData({ ...userData, telephone: evt.target.value });
+                    setUserData({
+                      ...userData,
+                      telephone: telephoneMask(evt.target.value),
+                    });
                   }}
                 />
               </InputGroup>

@@ -2,13 +2,12 @@ import styled from 'styled-components';
 
 export const ContainerDashboard = styled.div`
   margin: auto 15vw;
-  position: static;
 
   @media (max-width: 700px) {
-    margin: auto 5vw;
+    margin: auto 10vw;
   }
 
-  padding: 40px 0;
+  padding: 30px 0;
   max-width: 100vw;
 
   h1 {

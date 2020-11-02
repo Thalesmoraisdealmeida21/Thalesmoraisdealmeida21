@@ -142,6 +142,33 @@ const Checkout: React.FC = () => {
     return cpfCnpjFormatted === '' ? value : cpfCnpjFormatted;
   }, []);
 
+  const telephoneMask = useCallback(
+    (v: string) => {
+      let valFormatted = v.replace(/\D/g, ''); // Remove tudo o que não é dígito
+      valFormatted = valFormatted.replace(/^0/, '');
+
+      if (valFormatted.length > 10) {
+        valFormatted = valFormatted.replace(
+          /^(\d\d)(\d{5})(\d{4}).*/,
+          '($1) $2-$3',
+        );
+      } else if (valFormatted.length > 5) {
+        valFormatted = valFormatted.replace(
+          /^(\d\d)(\d{4})(\d{0,4}).*/,
+          '($1) $2-$3',
+        );
+      } else if (valFormatted.length > 2) {
+        valFormatted = valFormatted.replace(/^(\d\d)(\d{0,5})/, '($1) $2');
+      } else {
+        valFormatted = valFormatted.replace(/^(\d*)/, '($1');
+      }
+
+      console.log(userData.telephone);
+      return valFormatted;
+    },
+    [userData],
+  );
+
   useEffect(() => {
     async function getUserData(): Promise<void> {
       try {
@@ -195,10 +222,18 @@ const Checkout: React.FC = () => {
       uf,
     }: CardData) => {
       try {
+        let tel = `+${telephone.replace(/[\(\)\.\s-]+/g, '')}`;
+
+        tel = tel.replace('++', '+');
+
+        userData.telephone = tel;
+
+        console.log(city);
+
+        console.log(userData);
         const coursesIds = courses.map(courseItem => {
           return courseItem.id;
         });
-
         const items = courses.map(cours => {
           return {
             id: cours.id,
@@ -208,9 +243,7 @@ const Checkout: React.FC = () => {
             tangible: false,
           };
         });
-
         formRef.current?.setErrors({});
-
         const schema = Yup.object().shape({
           name: Yup.string().required(
             'Preencha todos os campos, campo nome não foi informado',
@@ -229,11 +262,11 @@ const Checkout: React.FC = () => {
             .trim()
             .min(8, 'Informe um CEP Válido')
             .max(11, 'Informe um CEP Válido'),
-          telephone: Yup.number().required(
+          telephone: Yup.string().required(
             'Preencha todos os campos, informe o seu telefone',
           ),
           city: Yup.string().required('Informe sua Cidade'),
-          uf: Yup.string(),
+
           // card_holder_name: Yup.string().required('Informe o nome do cartão'),
           // card_cvv: Yup.string()
           //   .max(3, 'Informe um CVV válido')
@@ -241,11 +274,9 @@ const Checkout: React.FC = () => {
           //   .required('Informe o um CVV'),
           // card_number: Yup.string().required('Informe o número do cartão'),
         });
-
         const client = await pagarme.client.connect({
           api_key: process.env.REACT_APP_PAGARME_ENCRYPTION_KEY,
         });
-
         await schema.validate(
           {
             card_cvv,
@@ -269,9 +300,7 @@ const Checkout: React.FC = () => {
             abortEarly: false,
           },
         );
-
         // const expirationDate = cardExpirationDateMonth + cardExpirationDateYear;
-
         const card_hash = await client.security.encrypt({
           card_number,
           card_holder_name,
@@ -279,7 +308,6 @@ const Checkout: React.FC = () => {
             cardExpirationDateMonth + cardExpirationDateYear,
           card_cvv,
         });
-
         const response = await api.post<TransactionStatus>(
           `/orders/pay/${order}`,
           {
@@ -293,9 +321,7 @@ const Checkout: React.FC = () => {
         if (response.data.boleto_url) {
           window.open(response.data.boleto_url);
         }
-
         const dataCourse = { userId: user.id, courses: coursesIds };
-
         if (response.data.status === 'paid') {
           await api.post('/users/courses', dataCourse);
           toast(
@@ -304,11 +330,9 @@ const Checkout: React.FC = () => {
               type: 'success',
             },
           );
-
           history.push('/dashboard');
           clearCart();
         }
-
         if (response.data.status === 'waiting_payment') {
           toast(
             'Pedido Realizado com sucesso. Após pagamento seu boleto sera processado em no náximo 48 horas',
@@ -316,7 +340,6 @@ const Checkout: React.FC = () => {
               type: 'success',
             },
           );
-
           history.push('/myorders');
           clearCart();
         }
@@ -405,11 +428,12 @@ const Checkout: React.FC = () => {
                     value={userData.telephone}
                     label="Telefone"
                     name="telephone"
+                    placeholder="(DD) 9999-9999"
                     type="text"
                     onChange={evt => {
                       setUserData({
                         ...userData,
-                        telephone: evt.target.value,
+                        telephone: telephoneMask(evt.target.value),
                       });
                     }}
                   />
@@ -437,7 +461,6 @@ const Checkout: React.FC = () => {
                     <div style={{ flex: 1, width: '150px' }}>
                       <select
                         placeholder="UF"
-                        value={userData.uf}
                         style={{ width: '80px' }}
                         name="uf"
                         id="uf"
@@ -446,7 +469,12 @@ const Checkout: React.FC = () => {
                         }}
                       >
                         {ufs.map(uf => (
-                          <option value={uf.sigla}>{uf.sigla}</option>
+                          <option
+                            selected={uf.sigla === userData.uf}
+                            value={uf.sigla}
+                          >
+                            {uf.sigla}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -476,17 +504,6 @@ const Checkout: React.FC = () => {
                 </InputGroup>
 
                 <InputGroup>
-                  {/* <Input
-                    value={userData.uf}
-                    label="UF"
-                    name="uf"
-                    maxLength={2}
-                    type="text"
-                    onChange={evt => {
-                      setUserData({ ...userData, uf: evt.target.value });
-                    }}
-                  /> */}
-
                   <Input
                     value={userData.address}
                     label="Endereço"
@@ -630,7 +647,7 @@ const Checkout: React.FC = () => {
 
               <DetailsPayment>
                 <strong>
-                  Total a Pagar: <br />
+                  Total a Pagar:
                   <Input
                     id="amount"
                     name="amount"
