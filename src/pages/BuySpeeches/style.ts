@@ -24,7 +24,6 @@ export const Speeches = styled.div`
 export const ItemList = styled.div`
   width: 100%;
   margin: 15px;
-
   height: 130px;
   left: 141px;
   top: 300px;
