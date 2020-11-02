@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { MdVisibility, MdClear } from 'react-icons/md';
+import { MdClear } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import Header from '../../../components/header';
 import api from '../../../services/api';
