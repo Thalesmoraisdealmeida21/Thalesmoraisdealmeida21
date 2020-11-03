@@ -356,9 +356,12 @@ const Checkout: React.FC = () => {
             return null;
           });
         } else {
-          toast('Ocorreu um erro ao efetuar a transação, ', {
-            type: 'error',
-          });
+          toast(
+            'Ocorreu um erro ao efetuar a transação. Por favor verifique os campos informados ',
+            {
+              type: 'error',
+            },
+          );
         }
       }
     },
@@ -560,18 +563,18 @@ const Checkout: React.FC = () => {
             <Section>
               <TitleSection>Pagamento</TitleSection>
               <PaymentsMethod>
-                Boleto
                 <Radio
                   value="boleto"
                   onChange={handleChangePaymentMethod}
                   checked={paymentMethod === 'boleto'}
                 />
-                Cartão de Crédito{' '}
+                Boleto
                 <Radio
                   value="creditCard"
                   onChange={handleChangePaymentMethod}
                   checked={paymentMethod === 'creditCard'}
                 />
+                Cartão de Crédito{' '}
               </PaymentsMethod>
               {paymentMethod === 'creditCard' && (
                 <>

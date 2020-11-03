@@ -69,7 +69,7 @@ const Header: React.FC = () => {
               handleShowBox();
             }}
           >
-            Dúvidas? chama no whatsapp
+            Chama no Whatsapp
           </button>
         </TellWhats>
       </Container>

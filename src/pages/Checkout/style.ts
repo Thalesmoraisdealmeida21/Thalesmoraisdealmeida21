@@ -51,8 +51,9 @@ export const InputGroup = styled.div`
     height: 50px;
     border: transparent;
     border-radius: 8px;
-    background: #f3f3f3;
+    background: #eaeaea;
     margin: 10px;
+    border: 1px solid silver;
   }
 `;
 

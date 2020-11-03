@@ -136,7 +136,7 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
               >
                 Meus Pedidos
               </MenuItem>
-              <MenuItem onClick={logout}>Logout</MenuItem>
+              <MenuItem onClick={logout}>Sair</MenuItem>
             </Menu>
           </LoginContent>
         </Content>

@@ -15,11 +15,11 @@ export const ContainerInputs = styled.div`
 export const Container = styled.div<ContainerProps>`
   padding: 15px;
   border-radius: 5px;
-  background: #f3f3f3;
+  background: #eaeaea;
   width: 100%;
   margin-top: 8px;
+  border: 1px solid silver;
 
-  border-color: #c53030;
   display: flex;
 
   div {
