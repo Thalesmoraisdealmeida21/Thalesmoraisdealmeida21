@@ -1,18 +1,18 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
-import { Editor } from '@tinymce/tinymce-react';
 
 import api from '../../services/api';
 
 import Header from '../../components/header';
 
 import Input from '../../components/input';
+import Textarea from '../../components/textarea';
 
-import { ContainerFormAddSpeeche, EditorContainer } from './style';
+import { ContainerFormAddSpeeche, InputGroup } from './style';
 import Button from '../../components/button';
 
 interface AddSpeecheDTO {
@@ -25,7 +25,7 @@ const AddSpeeche: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const history = useHistory();
-  const [editor, setEditor] = useState();
+  // const [editor, setEditor] = useState();
 
   const handlAddSpeeche = useCallback(
     async (data: AddSpeecheDTO) => {
@@ -55,9 +55,9 @@ const AddSpeeche: React.FC = () => {
     [history],
   );
 
-  const handleEditorChange = useCallback(content => {
-    setEditor(content);
-  }, []);
+  // const handleEditorChange = useCallback(content => {
+  //   setEditor(content);
+  // }, []);
 
   return (
     <>
@@ -86,35 +86,13 @@ const AddSpeeche: React.FC = () => {
             name="price"
             placeholder="Preço. Ex R$ 100.00"
           />
-          <Input
-            id="description"
-            type="text"
-            name="description"
-            value={editor}
-            placeholder="Preço. Ex R$ 100.00"
-            style={{ display: 'none' }}
-          />
 
-          <EditorContainer>
-            <Editor
-              onEditorChange={handleEditorChange}
-              id="description"
-              textareaName="description"
-              tagName="description"
-              initialValue="<p>Digite a descrição da palestra</p>"
-              init={{
-                selector: 'textarea',
-                branding: false,
-                plugins: ['fullscreen', 'preview', 'link'],
-                default_link_target: '_blank',
-                toolbar:
-                  'undo | remake link fullscreen bold italic fontsizeselect forecolor backcolor ',
-                fontsize_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
-                language: 'pt_BR',
-              }}
-              apiKey="vrzyvdpq0s7ufjhjrhrcysrwkvwwk2tbzrpq02d7k5m1knqg"
-            />
-          </EditorContainer>
+          <InputGroup>
+            <Textarea label="Resumo" id="resume" name="resume" />
+
+            <Textarea label="Descrição" id="description" name="description" />
+          </InputGroup>
+
           <Button type="submit">Cadastrar Palestra</Button>
         </Form>
       </ContainerFormAddSpeeche>

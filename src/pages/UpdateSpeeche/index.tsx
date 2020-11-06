@@ -4,14 +4,15 @@ import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from 'react-router-dom';
-import { Editor } from '@tinymce/tinymce-react';
+
 import api from '../../services/api';
 
 import Header from '../../components/header';
 
 import Input from '../../components/input';
+import Textarea from '../../components/textarea';
 
-import { ContainerFormAddSpeeche, EditorContainer } from './style';
+import { ContainerFormAddSpeeche, InputGroup } from './style';
 import Button from '../../components/button';
 
 interface Course {
@@ -20,6 +21,7 @@ interface Course {
   description: string;
   videoLink: string;
   price: number;
+  resume: string;
 }
 
 const AddSpeeche: React.FC = () => {
@@ -28,8 +30,8 @@ const AddSpeeche: React.FC = () => {
   const history = useHistory();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [editor, setEditor] = useState<string>();
-  const { courseId } = useParams();
+  // const [editor, setEditor] = useState<string>();
+  const { courseId } = useParams<{ courseId: string }>();
   const [course, setCourse] = useState<Course>({} as Course);
 
   useEffect(() => {
@@ -73,13 +75,13 @@ const AddSpeeche: React.FC = () => {
     [history],
   );
 
-  const handleEditorChange = useCallback(
-    content => {
-      setEditor(content);
-      setCourse({ ...course, description: content });
-    },
-    [setCourse, setEditor, course],
-  );
+  // const handleEditorChange = useCallback(
+  //   content => {
+  //     setEditor(content);
+  //     setCourse({ ...course, description: content });
+  //   },
+  //   [setCourse, setEditor, course],
+  // );
 
   return (
     <>
@@ -87,7 +89,7 @@ const AddSpeeche: React.FC = () => {
 
       <ContainerFormAddSpeeche>
         <Form ref={formRef} onSubmit={handlAddSpeeche}>
-          <h1>Nova Palestra</h1>
+          <h1>Editar Palestra</h1>
           <Input
             id="id"
             name="id"
@@ -96,6 +98,7 @@ const AddSpeeche: React.FC = () => {
           />
           <Input
             id="name"
+            label="Nome"
             name="name"
             value={course.name}
             onChange={evt => {
@@ -105,6 +108,7 @@ const AddSpeeche: React.FC = () => {
           />
           <Input
             id="videoLink"
+            label="Video"
             name="videoLink"
             value={course.videoLink}
             placeholder="Video. Ex wistia.com.br/video"
@@ -115,47 +119,35 @@ const AddSpeeche: React.FC = () => {
 
           <Input
             id="price"
+            label="Preço"
             type="text"
             name="price"
             value={course.price}
-            placeholder="Preço. Ex R$ 100.00"
-            onChange={evt => {
-              setCourse({ ...course, price: Number(evt.target.value) });
-            }}
-          />
-          <Input
-            id="description"
-            type="text"
-            name="description"
-            value={course.description}
-            placeholder="Preço. Ex R$ 100.00"
-            style={{ display: 'none' }}
-            onChange={evt => {
-              setCourse({ ...course, description: evt.target.value });
-            }}
           />
 
-          <EditorContainer>
-            <Editor
-              onEditorChange={handleEditorChange}
-              id="description"
-              textareaName="description"
-              tagName="description"
-              initialValue={course.description}
-              init={{
-                selector: 'textarea',
-                branding: false,
-                plugins: ['fullscreen', 'preview', 'link'],
-                default_link_target: '_blank',
-                toolbar:
-                  'undo | remake link fullscreen bold italic fontsizeselect forecolor backcolor ',
-                fontsize_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
-                language: 'pt_BR',
+          <InputGroup>
+            <Textarea
+              label="Resumo"
+              id="resume"
+              name="resume"
+              value={course.resume}
+              onChange={evt => {
+                setCourse({ ...course, resume: evt.target.value });
               }}
-              apiKey="vrzyvdpq0s7ufjhjrhrcysrwkvwwk2tbzrpq02d7k5m1knqg"
             />
-          </EditorContainer>
-          <Button type="submit">Cadastrar Palestra</Button>
+
+            <Textarea
+              label="Descrição"
+              id="description"
+              name="description"
+              value={course.description}
+              onChange={evt => {
+                setCourse({ ...course, description: evt.target.value });
+              }}
+            />
+          </InputGroup>
+
+          <Button type="submit">Salvar</Button>
         </Form>
       </ContainerFormAddSpeeche>
     </>

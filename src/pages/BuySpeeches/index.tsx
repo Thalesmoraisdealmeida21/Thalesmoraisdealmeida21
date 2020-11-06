@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { FiEdit } from 'react-icons/fi';
+import { FiEdit, FiTrash } from 'react-icons/fi';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
@@ -29,6 +29,24 @@ const AddSpeeche: React.FC = () => {
   const { addToCart } = useCart();
 
   const { user } = useAuth();
+
+  const handlInactive = useCallback(
+    (course: Course) => {
+      try {
+        api.delete(`/courses/${course.id}`);
+        const newArrayCourses = courses.filter(cours => cours.id !== course.id);
+        setCourses(newArrayCourses);
+        toast('Inativado com sucesso', {
+          type: 'success',
+        });
+      } catch {
+        toast('Ocorreu um erro ao tentar inativar o curso', {
+          type: 'error',
+        });
+      }
+    },
+    [courses],
+  );
 
   useEffect(() => {
     try {
@@ -127,6 +145,19 @@ const AddSpeeche: React.FC = () => {
                         Editar
                       </Link>
                     </Button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handlInactive(course);
+                      }}
+                      style={{
+                        display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
+                      }}
+                    >
+                      <FiTrash size={20} />
+                      Desativar
+                    </button>
 
                     <Button
                       disableRipple

@@ -23,12 +23,17 @@ export const ContainerFormAddSpeeche = styled.div`
     margin-top: 200px;
     border-radius: 20px;
     height: 700px;
+    display: flex;
+    flex-direction: column;
+
     button {
-      margin-top: 130px;
       width: 20vw;
       align-items: center;
       align-content: center;
       text-align: center;
+
+      margin: 0 auto;
+      margin-top: 60px;
     }
   }
 `;
@@ -39,4 +44,9 @@ export const EditorContainer = styled.div`
   border-radius: 10px;
   color: black;
   position: relative;
+`;
+
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

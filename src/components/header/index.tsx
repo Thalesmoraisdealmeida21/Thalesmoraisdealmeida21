@@ -8,7 +8,7 @@ import {
 
 // import { MdCreate } from 'react-icons/md';
 
-import { MdAddShoppingCart, MdOndemandVideo } from 'react-icons/md';
+import { MdAddShoppingCart, MdOndemandVideo, MdCreate } from 'react-icons/md';
 import { Link, useHistory } from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -186,7 +186,7 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
             label="Usuários"
             icon={<FiUser />}
           />
-          {/* 
+
           <BottomNavigationAction
             style={{
               display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
@@ -196,7 +196,7 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
             }}
             label="Postagens"
             icon={<MdCreate />}
-          /> */}
+          />
 
           {/* <BottomNavigationAction
             style={{
