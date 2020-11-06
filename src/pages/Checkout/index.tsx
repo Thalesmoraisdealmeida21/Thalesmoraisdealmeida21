@@ -238,7 +238,7 @@ const Checkout: React.FC = () => {
           return {
             id: cours.id,
             title: cours.name,
-            unit_price: Number(cours.price),
+            unit_price: Number(cours.price * 100),
             quantity: 1,
             tangible: false,
           };
