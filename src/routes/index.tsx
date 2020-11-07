@@ -25,6 +25,9 @@ import Cart from '../pages/Cart';
 import Order from '../pages/order';
 import Checkout from '../pages/Checkout';
 import MyOrders from '../pages/order/MyOrders';
+import Depoiments from '../pages/Depoiments/PageDepoiments';
+
+import NewDepoiments from '../pages/Depoiments/NewDepoiment';
 
 const Routes: React.FC = () => {
   return (
@@ -40,6 +43,10 @@ const Routes: React.FC = () => {
       <Route path="/dashboard" isPrivate component={Dashboard} />
       <Route path="/add-speeche" isPrivate component={AddSpeeche} />
       <Route path="/myorders" isPrivate component={MyOrders} />
+
+      <Route path="/depoiments/new" isPrivate component={NewDepoiments} />
+      <Route path="/depoiments" isPrivate component={Depoiments} />
+
       <Route path="/profile" isPrivate component={ProfilePage} />
       <Route
         path="/speeche/update/:courseId"

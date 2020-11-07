@@ -166,6 +166,7 @@ const ViewPost: React.FC = () => {
             value={editor || post.description}
             style={{ display: 'none' }}
           />
+          {console.log(post.description)}
           <EditorContainer>
             <Editor
               onEditorChange={handleEditorChange}
