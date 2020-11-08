@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { FiTrash, FiPenTool } from 'react-icons/fi';
+import { FiTrash, FiEdit } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Header from '../../../components/header';
@@ -94,8 +94,13 @@ const PageDepoiments: React.FC = () => {
                     <FiTrash />
                   </button>
 
-                  <button type="button">
-                    <FiPenTool />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      history.push(`/depoiments/${depoiment.id}`);
+                    }}
+                  >
+                    <FiEdit />
                   </button>
                 </ActionsDepoiment>
               </Depoiment>

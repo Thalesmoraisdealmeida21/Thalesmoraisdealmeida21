@@ -17,6 +17,7 @@ const PageDepoiments: React.FC = () => {
   const handlCreateDepoiment = useCallback(
     async data => {
       try {
+        console.log(data);
         await api.post('/depoiments', data);
         toast('Registro salvo com sucesso', {
           type: 'success',

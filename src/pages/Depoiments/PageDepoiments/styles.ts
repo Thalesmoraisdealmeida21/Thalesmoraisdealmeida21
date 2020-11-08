@@ -54,6 +54,14 @@ export const Depoiment = styled.div`
   h1 {
     padding: 15px 0;
   }
+
+  p {
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
 
 export const ActionsDepoiment = styled.div`

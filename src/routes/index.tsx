@@ -29,6 +29,8 @@ import Depoiments from '../pages/Depoiments/PageDepoiments';
 
 import NewDepoiments from '../pages/Depoiments/NewDepoiment';
 
+import UpdateDepoiment from '../pages/Depoiments/UpdateDepoiment';
+
 const Routes: React.FC = () => {
   return (
     <Switch>
@@ -40,11 +42,17 @@ const Routes: React.FC = () => {
       <Route path="/cart" isPrivate component={Cart} />
       <Route path="/checkout/:order" isPrivate component={Checkout} />
       <Route path="/orders" isPrivate component={Order} />
+
       <Route path="/dashboard" isPrivate component={Dashboard} />
       <Route path="/add-speeche" isPrivate component={AddSpeeche} />
       <Route path="/myorders" isPrivate component={MyOrders} />
 
       <Route path="/depoiments/new" isPrivate component={NewDepoiments} />
+      <Route
+        path="/depoiments/:idDepoiment"
+        isPrivate
+        component={UpdateDepoiment}
+      />
       <Route path="/depoiments" isPrivate component={Depoiments} />
 
       <Route path="/profile" isPrivate component={ProfilePage} />
