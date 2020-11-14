@@ -25,6 +25,7 @@ interface Post {
   resume: string;
   category: string;
   description: string;
+  facebookLink: string;
 }
 
 interface Image {
@@ -123,12 +124,14 @@ const ViewPost: React.FC = () => {
             name="resume"
             id="resume"
           />
+          <Input label="Facebook Post" name="facebookLink" id="facebookLink" />
           <Input
             name="description"
             id="description"
             value={editor}
             style={{ display: 'none' }}
           />
+
           <EditorContainer>
             <Editor
               onEditorChange={handleEditorChange}

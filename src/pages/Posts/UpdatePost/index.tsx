@@ -27,6 +27,7 @@ interface Post {
   category: string;
   description: string;
   image: string;
+  facebookLink: string;
 }
 
 interface Image {
@@ -159,6 +160,12 @@ const ViewPost: React.FC = () => {
             onChange={evt => {
               setPost({ ...post, resume: evt.target.value });
             }}
+          />
+          <Input
+            label="Facebook"
+            name="facebookLink"
+            id="facebookLink"
+            value={post.facebookLink}
           />
           <Input
             name="description"
