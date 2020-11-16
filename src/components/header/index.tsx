@@ -95,7 +95,7 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
     <>
       <Container>
         <Content>
-          <img src={logo} width="300px" alt="Logo" />
+          <img src={logo} alt="logo" />
 
           {/* <FiArrowLeft onClick={goBack} size={40} color="white" /> */}
 
@@ -171,9 +171,6 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
           />
 
           <BottomNavigationAction
-            style={{
-              display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
-            }}
             onClick={() => {
               history.push('/add-speeche');
             }}
@@ -182,9 +179,6 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
           />
 
           <BottomNavigationAction
-            style={{
-              display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
-            }}
             onClick={() => {
               history.push('/users');
             }}
@@ -193,9 +187,6 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
           />
 
           <BottomNavigationAction
-            style={{
-              display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
-            }}
             onClick={() => {
               history.push('/posts');
             }}
@@ -204,9 +195,6 @@ const Header: React.FC<PositionMenu> = ({ position }) => {
           />
 
           <BottomNavigationAction
-            style={{
-              display: `${user.level !== 'ADM' ? 'none' : 'block'}`,
-            }}
             onClick={() => {
               history.push('/depoiments');
             }}
