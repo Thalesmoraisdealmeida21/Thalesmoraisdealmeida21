@@ -42,7 +42,7 @@ export const Options = styled.div`
 export const Depoiment = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 280px;
   background: #fff;
   padding: 15px;
   border: transparent;

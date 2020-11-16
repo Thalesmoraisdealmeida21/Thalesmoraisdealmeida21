@@ -46,7 +46,7 @@ const Header: React.FC = () => {
                 onKeyDown={evt => {
                   if (evt.key === 'Enter') {
                     window.open(
-                      `https://api.whatsapp.com/send?phone=5562981933699&text=${textMessage}`,
+                      `https://api.whatsapp.com/send?phone=5555996628613&text=${textMessage}`,
                     );
                   }
                 }}
@@ -56,7 +56,7 @@ const Header: React.FC = () => {
 
               <a
                 target="__blank"
-                href={`https://api.whatsapp.com/send?phone=5562981933699&text=${textMessage}`}
+                href={`https://api.whatsapp.com/send?phone=5555996628613&text=${textMessage}`}
               >
                 <MdSend size={16} />
               </a>
