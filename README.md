@@ -5,7 +5,7 @@
 </h1>
 
 <h4 align="center">
-    Uma plataforma web para assistir e vender palestras onlione.
+    Uma plataforma web para assistir e vender palestras online.
 </h4>
 
 <p align="center">
