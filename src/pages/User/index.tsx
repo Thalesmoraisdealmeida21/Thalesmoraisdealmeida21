@@ -178,7 +178,7 @@ const User: React.FC = () => {
               }}
               placeholder="Buscar um usuário"
             />
-            <Button
+            {/* <Button
               variant="contained"
               color="primary"
               onClick={() => {
@@ -186,7 +186,7 @@ const User: React.FC = () => {
               }}
             >
               Enviar E-mail Para todos
-            </Button>
+            </Button> */}
           </TableHeaderContent>
 
           <Table className={classes.table} aria-label="simple table">
