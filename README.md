@@ -1,8 +1,13 @@
 
 
-<h1 align="center">
-      <a href="#" alt="site do ecoleta">E Learned </a>
-</h1>
+
+
+<center>
+
+  ![Logo do R](src/assets/logoConteined.png)
+  
+   
+</center>
 
 <h4 align="center">
     Uma plataforma web para assistir e vender palestras online.
