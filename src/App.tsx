@@ -16,6 +16,7 @@ const App: React.FC = () => {
         <AuthProvider>
           <CartProvider>
             <Routes />
+
             <Footer />
           </CartProvider>
         </AuthProvider>
@@ -28,7 +29,6 @@ const App: React.FC = () => {
           rtl={false}
           pauseOnFocusLoss
           draggable
-          pauseOnHover
         />
       </BrowserRouter>
 
