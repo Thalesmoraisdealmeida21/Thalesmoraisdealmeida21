@@ -5,5 +5,5 @@
 [![Twitter Badge](https://img.shields.io/badge/-Twitter-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/thales_morais21)](https://twitter.com/thales_morais21)
 
 ### Sobre 
-Sou desenvolvedor web com foco na stack Javascript: Node.js react e react native, tenho alguns projetos em angular e conhecimentos em php porém e sou apaixonado por tecnologia e novos desafios.
+Sou desenvolvedor apaixonado por tecnologia e desenvolvendo minhas aplicações a mais de 8 anos. Atualmente trabalho como Engenheiro QA desenvolvendo soluções voltadas a qualidade. Se quiser trocar a ideia sobre tecnologia programação ou tem algum trabalho é só entra em contato comigo pelas minhas redes.
 
