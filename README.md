@@ -1,24 +1,27 @@
 # hello, My name is Thales! :D
 
-[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/fagnerpsantos)](https://github.com/thalesmoraisdealmeida21)
+[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/thalesmoraisdealmeida21)](https://github.com/thalesmoraisdealmeida21)
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/thales-morais/)](https://www.linkedin.com/in/thales-morais/)
 
+---
 
 # 👋 Hi, I'm Thales Morais
 
-QA Engineer with 9+ years in IT, specialized in **test automation, performance testing, and RPA**.  
-I build reliable and scalable solutions, helping teams deliver high-quality software with confidence.
+Software Engineer with 9+ years in IT, focused on building **scalable systems, automation solutions, and high-quality software**.  
+I have strong experience with backend development, test automation, and performance, always aiming for reliability and efficiency.
 
 ---
 
 ## 📌 What I Do
 
-- Build and maintain automated test frameworks (UI & API)  
-- Design performance tests and analyze system behavior  
-- Automate repetitive processes using RPA  
-- Support CI/CD pipelines and improve software quality  
+- Build scalable and maintainable systems  
+- Develop automation solutions and backend services  
+- Design and implement API integrations  
+- Improve system performance and reliability  
+- Work with CI/CD and modern development practices  
 
 ---
+
 
 ## 📊 Stats
 
@@ -29,4 +32,4 @@ I build reliable and scalable solutions, helping teams deliver high-quality soft
 ## 🤝 Connect
 
 - 💼 LinkedIn: https://www.linkedin.com/in/thales-morais/  
-- 📂 GitHub: https://github.com/Thalesmoraisdealmeida21  
+- 📂 GitHub: https://github.com/thalesmoraisdealmeida21  
